@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://musadaqhanif.com/
+
+# Sitemaps
+Sitemap: https://musadaqhanif.com/sitemap.xml

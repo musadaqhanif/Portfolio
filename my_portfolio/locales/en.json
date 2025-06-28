@@ -1,0 +1,119 @@
+{
+    "Sidebar": {
+        "welcome": "Welcome !",
+        "lastupdate": "Updated on",
+        "dark": "Dark",
+        "light": "Light",
+        "openSource": "Open Source under GPL License"
+    },
+    "Home": {
+        "greeting": "Hello everyone",
+        "iam": "I'm",
+        "based": "Based in Lahore Punjab Pakistan, ID",
+        "introduction": "Experienced Full-stack Developer",
+        "passion": "I'm passionate crafting exceptional web experiences by building efficient, scalable with functional and visually appealing digital solutions.",
+        "motto": "Bringing digital dreams to life",
+        "openToOpportunities": "Open to exciting opportunities",
+        "collaboration": "Let's collaborate!",
+        "freelance": "I'm open for freelance work. Don't hesitate to contact me if you want to work together.",
+        "getInTouch": "Get in Touch",
+        "getResume": "Get Resume",
+        "share_title": "My Personal Website",
+        "thank_you_message": "Thank you for visiting ! 😊 Feel free to share with your friends. 🎉",
+        "share_link": "Share Link",
+        "link_copied": "Link Copied!",
+        "techstack": "Technologies Used"
+    },
+   "About": {
+    "title": "About",
+    "metaDesc": "Discover more about Musadaq Hanif, an experienced full-stack developer with skills in coding, UI/UX design, and app development. Let's get to know each other better!",
+    "subtitle": "Get to know me better and discover more beyond the resume.",
+    "journeyTitle": "My Journey",
+    "valuesTitle": "Values and Philosophy",
+    "funTitle": "Fun Facts",
+    "intro": "Hi, I am Musadaq Hanif, a full-stack developer with over 1 year of experience crafting scalable and responsive web applications using React, Node.js, and MongoDB. Committed to writing clean, maintainable code and designing intuitive user experiences. Proven problem-solver with a strong track record in hackathons, including Neutec Web Hackathon Runner-Up. Driven to collaborate with forward-thinking teams to deliver innovative and efficient solutions that address real-world challenges.",
+    "journey": "My journey in web development started with building responsive interfaces using HTML, CSS, and JavaScript, evolving into full-stack skills with React, Node.js, and MongoDB. Participating in hackathons and developing freelance projects like Neurix Solution strengthened my problem-solving and deployment experience. Alongside my Software Engineering degree, I gained exposure to machine learning, broadening my perspective on tech innovation. I'm driven to keep creating scalable, user-centered solutions that address real-world challenges.",
+    "values": "I believe in continuous learning and improvement. I am driven by a desire to create websites that are not only functional but also aesthetically pleasing. My work is guided by the principles of simplicity, usability, and accessibility. I strive to keep up with the latest trends and technologies in web development to ensure that my skills are always up to date.",
+    "funfact": "I don't have any fun facts yet 😭."
+  },
+    "Services": {
+        "title": "Services",
+        "metaDesc": "Explore the specialized servicesMusadaq Hanif offers, from web development, app development, UI/UX, design to consulting. Tailored solutions to bring your digital vision to life.",
+        "subtitle": "Learn about the specialized services I offer to clients.",
+        "FAQ": {
+            "faqHeading": "Frequently Asked Questions",
+            "faqDescription": "Quick answers to common questions about my services",
+            "contactText": "Got any more question?",
+            "contactLink": "Get in touch"
+        }
+    },
+    "Contact": {
+        "title": "Get in Touch",
+        "metaDesc": "Reach out toMusadaq Hanif for potential collaborations or inquiries. Connect via social media or send a direct message.",
+        "subtitle": "Reach out and start a conversation about potential collaborations or inquiries.",
+        "findSocial": "Find me on social media",
+        "orsendMsg": "Or send me a message",
+        "name": "Name",
+        "namePlaceholder": "Insert your name *",
+        "mail": "Mail",
+        "mailPlaceholder": "Insert your email *",
+        "projectDesc": "Project Description",
+        "descPlaceholder": "Write me your project description *",
+        "sendMsg": "Send a Message"
+    },
+    "Blog": {
+        "title": "Blog",
+        "metaDesc": "Dive into articles on code, creativity, and learning byMusadaq Hanif. Insights and updates from a Full-stack Developer's journey.",
+        "subtitle": "Exploring the world of code, creativity, and constant learning."
+    },
+    "Reviews": {
+        "title": "Client Reviews",
+        "metaDesc": "Read testimonials and reviews from clients about Musadaq Hanif's projects and services. Real feedback from satisfied customers.",
+        "subtitle": "See what clients say about my work and projects."
+    },
+    "Common": {
+        "comingsoon": "Coming Soon ....",
+        "back": "Back"
+    },
+    "Skillset": {
+        "title": "Skillset",
+        "metaDesc": "DiscoverMusadaq Hanif's technical skills, professional tools, and certificates that highlight his expertise in Full-stack development.",
+        "subtitle": "Discover related my technical skills and professional tools.",
+        "certificateTitle": "Certificates",
+        "certificateSubtitle": "A showcase of my professional certificates."
+    },
+    "Experience": {
+        "title": "Experience",
+        "metaDesc": "Explore the professional background ofMusadaq Hanif, highlighting key experiences and career achievements.",
+        "subtitle": "Find out my professional background and valuable experiences."
+    },
+    "Portfolio": {
+        "title": "Portfolio",
+        "metaDesc": "Browse the portfolio ofMusadaq Hanif, showcasing his latest projects and creative achievements in web development, app development, UI/UX design, Design and more.",
+        "subtitle": "Explore my latest projects and creations.",
+        "noPortfolio": "Apologies, there are currently no portfolios available for the {category} category.",
+        "seePortfolio": "See Project"
+    },
+    "Privacy": {
+        "title": "Privacy Policy",
+        "metaDesc": "Understand how I handle privacy on this website, including data collection, usage, and security measures.",
+        "subtitle": "This privacy policy explains how I collect, use, and protect your information.",
+        "information_collected": "I collect information that you provide to me directly, such as your name and email address.",
+        "usage": "I use this information to improve my services and communicate with you.",
+        "security": "I take the security of your information seriously and implement measures to protect it.",
+        "contact": "If you have any questions, please contact me at ",
+        "subtitles": {
+            "information_collected": "Information I Collect",
+            "usage": "Usage of Information",
+            "security": "Security of Your Information",
+            "contact": "Contact Me"
+        }
+    },
+    "Offline": {
+        "title": "You're Offline",
+        "metaDesc": "You are currently offline. Please check your internet connection and try again to access the website content.",
+        "subtitle": "No internet connection detected.",
+        "message": "It looks like you are currently offline. Please check your internet connection and try again.",
+        "retry": "Try Again"
+    }
+}
