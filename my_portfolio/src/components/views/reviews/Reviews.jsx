@@ -8,9 +8,13 @@ const Reviews = ({ reviews }) => {
             case 'text':
                 return (
                     <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
-                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed italic">
+                        {/* <p className="text-gray-700 dark:text-gray-300 leading-relaxed italic">
                             "{review.reviewContent}"
+                        </p> */}
+                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed italic">
+                            &quot;{review.reviewContent}&quot;
                         </p>
+
                     </div>
                 );
             case 'image':
@@ -53,11 +57,10 @@ const Reviews = ({ reviews }) => {
         return Array.from({ length: 5 }, (_, index) => (
             <FaStar
                 key={index}
-                className={`w-4 h-4 ${
-                    index < rating 
-                        ? 'text-yellow-400 fill-current' 
+                className={`w-4 h-4 ${index < rating
+                        ? 'text-yellow-400 fill-current'
                         : 'text-gray-300 dark:text-gray-600'
-                }`}
+                    }`}
             />
         ));
     };
