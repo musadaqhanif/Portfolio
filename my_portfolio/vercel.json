@@ -6,32 +6,6 @@
       "use": "@vercel/next"
     }
   ],
-  "routes": [
-    {
-      "src": "/sitemap.xml",
-      "dest": "/sitemap.xml"
-    },
-    {
-      "src": "/robots.txt",
-      "dest": "/robots.txt"
-    },
-    {
-      "src": "/manifest.json",
-      "dest": "/manifest.json"
-    },
-    {
-      "src": "/favicon/(.*)",
-      "dest": "/favicon/$1"
-    },
-    {
-      "src": "/images/(.*)",
-      "dest": "/images/$1"
-    },
-    {
-      "src": "/webfonts/(.*)",
-      "dest": "/webfonts/$1"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -74,6 +48,6 @@
     }
   ],
   "env": {
-    "NEXT_PUBLIC_SITE_URL": "https://musadaqhanif.com"
+    "NEXT_PUBLIC_SITE_URL": "https://musadaq.live"
   }
-} 
+}
