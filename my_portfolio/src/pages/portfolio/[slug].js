@@ -5,7 +5,7 @@ import DetailPortfolio from '@/components/views/portfolio/DetailPortfolio'
 import { NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { portfolios } from './portfolio.data';
+import { portfolios } from '../../constants/data/portfolio.data';
 
 const DetailPortfolioPage = ({ portfolio }) => {
     const { locale, pathname, query } = useRouter();

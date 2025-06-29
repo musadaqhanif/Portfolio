@@ -4,7 +4,7 @@ import Portfolio from '@/components/views/portfolio/Portfolio'
 import { useTranslations } from 'next-intl';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
-import { portfolios } from './portfolio.data';
+import { portfolios } from '../../constants/data/portfolio.data';
 
 const PortfolioPage = () => {
     const t = useTranslations('Portfolio');
