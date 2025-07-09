@@ -79,7 +79,7 @@ Nextrix Solution is a freelance business startup website designed to offer compr
 
 ## Key Features
 - **Service Portfolio**: Comprehensive display of offered services
-- **Professional Design**: Modern, business-focused interface
+- **Professional Design**: Modern and attractive, business-focused interface
 - **MERN Stack**: Full-stack implementation with modern technologies
 - **Responsive Design**: Optimized for all devices and screen sizes
 - **Business Ready**: Professional presentation for client acquisition
