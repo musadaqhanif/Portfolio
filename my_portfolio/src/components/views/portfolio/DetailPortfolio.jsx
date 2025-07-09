@@ -15,16 +15,28 @@ const MDEditorPreview = dynamic(
 const DetailPortfolio = ({ portfolio, locale }) => {
     return (
         <article className=''>
-            {/* Large background image */}
+            {/* Large background image or video */}
             <div className="relative w-full h-64 sm:h-96 mb-6 rounded-xl overflow-hidden">
-                <Image
-                    alt={portfolio.name}
-                    src={portfolio.thumbnail}
-                    fill
-                    style={{ objectFit: 'cover' }}
-                    className="w-full h-full object-cover"
-                    priority
-                />
+                {portfolio.thumbnailType === 'video' ? (
+                    <video
+                        src={portfolio.thumbnail}
+                        className="w-full h-full object-cover"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                    />
+                ) : (
+                    <Image
+                        alt={portfolio.name}
+                        src={portfolio.thumbnail}
+                        fill
+                        style={{ objectFit: 'cover' }}
+                        className="w-full h-full object-cover"
+                        priority
+                    />
+                )}
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-end p-6">
                     <h1 className="text-3xl sm:text-4xl font-bold text-white drop-shadow-lg">{portfolio.name}</h1>
                 </div>

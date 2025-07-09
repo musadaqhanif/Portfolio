@@ -74,7 +74,7 @@ const Portfolio = ({ portfolios, locale }) => {
       ) : (
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-5">
           {items.map((elem, index) => {
-            const { id, thumbnail, name, category, isFeatured, excerpt, slug, type } = elem;
+            const { id, thumbnail, thumbnailType, name, category, isFeatured, excerpt, slug, type } = elem;
             return (
               <motion.li
                 key={id || index}
@@ -100,16 +100,27 @@ const Portfolio = ({ portfolios, locale }) => {
                         </div>
                       </div>
                       <div className="relative">
-                        <Image
-                          src={thumbnail}
-                          alt={slug}
-                          width={999}
-                          height={999}
-                          className="aspect-thumbnail object-cover"
-                          // quality={100}
-                          priority={index === 0}    // kalau ini gambar pertama
-                          loading={index === 0 ? undefined : "lazy"}
-                        />
+                        {thumbnailType === 'video' ? (
+                          <video
+                            src={thumbnail}
+                            className="aspect-thumbnail object-cover w-full h-full"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            preload="metadata"
+                          />
+                        ) : (
+                          <Image
+                            src={thumbnail}
+                            alt={slug}
+                            width={999}
+                            height={999}
+                            className="aspect-thumbnail object-cover"
+                            priority={index === 0}
+                            loading={index === 0 ? undefined : "lazy"}
+                          />
+                        )}
                         <div className="flex gap-1 absolute top-0 left-0 w-full h-full bg-black opacity-0 transition-opacity duration-300 justify-center items-center text-white group-hover/portfolio:opacity-80">
                           {t("seePortfolio")}<BiRightArrowAlt />
                         </div>
