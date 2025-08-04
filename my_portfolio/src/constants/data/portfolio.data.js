@@ -20,7 +20,7 @@ export const portfolios = [
     content: `# GreenYasin.pk - Environmental Consulting Website
   
   ## Project Overview
-  GreenYasin is a modern, feature-rich web platform dedicated to environmental consulting and sustainability services. The website showcases the company’s expertise in areas such as air and water quality, soil analysis, waste management, and environmental compliance. It provides detailed information about services, projects, team members, and career opportunities, as well as a blog for sharing industry insights and updates.
+  GreenYasin is a modern, feature-rich web platform dedicated to environmental consulting and sustainability services. The website showcases the companys expertise in areas such as air and water quality, soil analysis, waste management, and environmental compliance. It provides detailed information about services, projects, team members, and career opportunities, as well as a blog for sharing industry insights and updates.
   
   ## Key Features
   - **Service Pages**: Detailed descriptions of environmental services including air, water, soil, and waste management.

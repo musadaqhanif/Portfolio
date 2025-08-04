@@ -1,5 +1,6 @@
 import { RiGithubFill, RiInstagramFill, RiLinkedinFill, RiTelegram2Fill, RiFacebookFill } from 'react-icons/ri'
 import { MdOutlineAlternateEmail } from 'react-icons/md'
+import { RiWhatsappFill } from 'react-icons/ri'
 
 export const Socials = [
     {
@@ -43,5 +44,12 @@ export const Socials = [
         link: 'https://www.facebook.com/mianmusadaq.mianmusada',
         eventName: 'Social: Facebook',
         label: 'Facebook',
+    },
+    {
+        reactIcon : <RiWhatsappFill size={18}/>,
+        background: '#25d366',
+        link: 'https://wa.me/923076293411?text=I%20need%20your%20services!',
+        eventName: 'Contact: WhatsApp',
+        label: 'WhatsApp',
     },
 ]
