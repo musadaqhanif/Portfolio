@@ -1,31 +1,58 @@
-import { BiBook, BiBriefcase, BiBuilding, BiCodeAlt, BiCube, BiCustomize, BiGrid, BiGroup, BiLogoFlask, BiPalette, BiPen, BiUser, BiBrain } from "react-icons/bi";
+import { BiBook, BiBriefcase, BiBuilding, BiCodeAlt, BiGroup, BiLogoFlask, BiUser, BiBrain, BiDesktop, BiGrid, BiCube } from "react-icons/bi";
 
 export const PORTFOLIO_CATEGORIES = {
-    'web': {
+    all: {
+        classIcon: 'fad fa-grid-2-plus',
+        reactIcon: <BiGrid />,
+        slug: 'all',
+        label: {
+            en: 'All',
+            id: 'Semua',
+        }
+    },
+    'web-development': {
         classIcon: 'fad fa-globe',
         reactIcon: <BiCodeAlt />,
-        slug: 'web',
+        slug: 'web-development',
         label: {
             en: 'Web Development',
             id: 'Pengembangan Web',
         }
     },
-    'webdev': {
-        classIcon: 'fad fa-code',
-        reactIcon: <BiCodeAlt />,
-        slug: 'webdev',
+    'desktop-application': {
+        classIcon: 'fad fa-desktop',
+        reactIcon: <BiDesktop />,
+        slug: 'desktop-application',
         label: {
-            en: 'Web Development',
-            id: 'Pengembangan Web',
+            en: 'Desktop Application',
+            id: 'Aplikasi Desktop',
         }
     },
-    'mlai': {
+    'ml-ai': {
         classIcon: 'fad fa-brain',
         reactIcon: <BiBrain />,
-        slug: 'mlai',
+        slug: 'ml-ai',
         label: {
             en: 'ML/AI',
             id: 'ML/AI',
+        }
+    },
+    'chrome-extensions': {
+        classIcon: 'fad fa-puzzle-piece',
+        reactIcon: <BiCodeAlt />,
+        slug: 'chrome-extensions',
+        label: {
+            en: 'Chrome Extensions',
+            id: 'Ekstensi Chrome',
+        }
+    },
+    'web-design': {
+        classIcon: 'fad fa-pen-nib',
+        reactIcon: <BiCodeAlt />,
+        slug: 'web-design',
+        label: {
+            en: 'Web Design',
+            id: 'Desain Web',
         }
     },
 };
@@ -65,5 +92,10 @@ export const PORTFOLIO_TYPES = {
         icon: <BiBook/>,
         en: "Academic Project",
         id: "Proyek Akademik"
+    },
+    'saas-platform': {
+        icon: <BiCube/>,
+        en: "SaaS Platform",
+        id: "Platform SaaS"
     }
 };

@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 
 import Profile from '@/assets/mypic.jpg'
 import Image from '@/components/elements/Image'
+import FiverrBadge from '@/components/elements/fiverr-badge'
 
 import HomeSocials from './HomeSocials'
 
@@ -41,6 +42,8 @@ const Home = () => {
                         {t('passion')}
                     </p>
                 </div>
+
+                <FiverrBadge />
 
                 <div className="flex flex-col space-y-1">
                     {infoItems.map((item, index) => (

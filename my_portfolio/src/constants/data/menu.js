@@ -24,22 +24,6 @@ export const MENU_ITEMS = [
         },
     },
     {
-        href: "/experience",
-        iconClass: "fad fa-graduation-cap",
-        label: {
-            en: "Experience",
-            id: "Pengalaman",
-        },
-    },
-    {
-        href: "/services",
-        iconClass: "fad fa-briefcase",
-        label: {
-            en: "Services",
-            id: "Layanan",
-        },
-    },
-    {
         href: "/portfolio",
         iconClass: "fad fa-layer-group",
         label: {
@@ -53,6 +37,22 @@ export const MENU_ITEMS = [
         label: {
             en: "Reviews",
             id: "Ulasan",
+        },
+    },
+    {
+        href: "/services",
+        iconClass: "fad fa-briefcase",
+        label: {
+            en: "Services",
+            id: "Layanan",
+        },
+    },
+    {
+        href: "/experience",
+        iconClass: "fad fa-graduation-cap",
+        label: {
+            en: "Experience",
+            id: "Pengalaman",
         },
     },
     {

@@ -10,8 +10,8 @@
         "greeting": "Hello everyone",
         "iam": "I'm",
         "based": "Based in Lahore Punjab Pakistan, ID",
-        "introduction": "Experienced Full-stack Developer",
-        "passion": "I'm passionate crafting exceptional web experiences by building efficient, scalable with functional and visually appealing digital solutions.",
+        "introduction": "Software Engineer / Full-Stack Web Developer",
+        "passion": "I am a Software Engineer with experience in building SaaS products, web applications, desktop applications, and Chrome extensions, delivering scalable, functional, and visually engaging digital solutions.",
         "motto": "Bringing digital dreams to life",
         "openToOpportunities": "Open to exciting opportunities",
         "collaboration": "Let's collaborate!",
@@ -22,7 +22,16 @@
         "thank_you_message": "Thank you for visiting ! 😊 Feel free to share with your friends. 🎉",
         "share_link": "Share Link",
         "link_copied": "Link Copied!",
-        "techstack": "Technologies Used"
+        "techstack": "Technologies Used",
+        "fiverrBadge": {
+            "title": "Fiverr",
+            "level": "Level 1 Seller",
+            "subtitle": "Trusted freelance partner for high-quality delivery.",
+            "rating": "5★ rating",
+            "successRate": "success rate",
+            "completedProjects": "successful projects",
+            "visitProfile": "Visit Fiverr Profile"
+        }
     },
    "About": {
     "title": "About",
@@ -34,7 +43,38 @@
     "intro": "Hi, I am Musadaq Hanif, a full-stack developer with over 1 year of experience crafting scalable and responsive web applications using React, Node.js, and MongoDB. Committed to writing clean, maintainable code and designing intuitive user experiences. Proven problem-solver with a strong track record in hackathons, including Neutec Web Hackathon Runner-Up. Driven to collaborate with forward-thinking teams to deliver innovative and efficient solutions that address real-world challenges.",
     "journey": "My journey in web development started with building responsive interfaces using HTML, CSS, and JavaScript, evolving into full-stack skills with React, Node.js, and MongoDB. Participating in hackathons and developing freelance projects like Neurix Solution strengthened my problem-solving and deployment experience. Alongside my Software Engineering degree, I gained exposure to machine learning, broadening my perspective on tech innovation. I'm driven to keep creating scalable, user-centered solutions that address real-world challenges.",
     "values": "I believe in continuous learning and improvement. I am driven by a desire to create websites that are not only functional but also aesthetically pleasing. My work is guided by the principles of simplicity, usability, and accessibility. I strive to keep up with the latest trends and technologies in web development to ensure that my skills are always up to date.",
-    "funfact": "I don't have any fun facts yet 😭."
+    "funfact": "I don't have any fun facts yet 😭.",
+    "aboutMeTitle": "About Me",
+    "aboutMeBody": "Hi, I’m Musadaq Hanif, a Software Engineer & Full-Stack Developer passionate about building scalable web applications, SaaS products, desktop apps, and Chrome extensions. I also have experience integrating AI and machine learning to create smarter, data-driven solutions.",
+    "whatIDo": {
+        "title": "What I Do",
+        "items": [
+            "Build full-stack web applications",
+            "Develop SaaS products and deploy end-to-end solutions",
+            "Create desktop applications and Chrome extensions",
+            "Integrate AI/ML features for smarter user experiences",
+            "Deliver clean, maintainable, and user-centered digital solutions"
+        ]
+    },
+    "achievements": {
+        "title": "Achievements",
+        "items": [
+            "Founded NeurixSolution.tech, growing it from 0 to running successful projects",
+            "Achieved Level 1 Seller badge on Fiverr in 1 month",
+            "Completed 19 projects with a 5-star rating and 99% success rate",
+            "Neutec Web Hackathon Runner-Up"
+        ]
+    },
+    "philosophy": {
+        "title": "My Philosophy",
+        "intro": "I believe in:",
+        "items": [
+            "Continuous learning and staying up-to-date with the latest tech",
+            "Creating solutions that are functional, intuitive, and visually appealing",
+            "Following principles of simplicity, usability, and accessibility",
+            "Collaborating with forward-thinking teams to solve real-world challenges"
+        ]
+    }
   },
     "Services": {
         "title": "Services",
@@ -49,7 +89,7 @@
     },
     "Contact": {
         "title": "Get in Touch",
-        "metaDesc": "Reach out toMusadaq Hanif for potential collaborations or inquiries. Connect via social media or send a direct message.",
+        "metaDesc": "Reach out to Musadaq Hanif for potential collaborations or inquiries. Connect via social media or send a direct message.",
         "subtitle": "Reach out and start a conversation about potential collaborations or inquiries.",
         "findSocial": "Find me on social media",
         "orsendMsg": "Or send me a message",

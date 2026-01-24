@@ -1,5 +1,6 @@
 import Sidebar from './partials/Sidebar'
 import Overlay from './partials/Overlay'
+import FloatingWhatsapp from '@/components/elements/floating-whatsapp'
 
 const Layout = ({ children }) => {
     return (
@@ -9,6 +10,7 @@ const Layout = ({ children }) => {
                 <Overlay />
                 {children}
             </main>
+            <FloatingWhatsapp />
         </>
     )
 }

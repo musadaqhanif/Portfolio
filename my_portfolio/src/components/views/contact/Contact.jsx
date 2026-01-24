@@ -1,6 +1,6 @@
 import { BiLoaderAlt, BiMailSend } from 'react-icons/bi';
 import { useTranslations } from 'next-intl';
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 
 import useEmailService from '@/services/EmailService';
 import { Socials } from '@/constants/data/socials';
@@ -9,10 +9,16 @@ const Contact = () => {
     const t = useTranslations();
     const formRef = useRef();
     const { sendEmail, loading } = useEmailService();
+    const [isSuccess, setIsSuccess] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        sendEmail(formRef.current);
+        setIsSuccess(false);
+        const result = await sendEmail(formRef.current);
+        if (result?.success) {
+            setIsSuccess(true);
+            setTimeout(() => setIsSuccess(false), 4000);
+        }
     };
 
     return (
@@ -45,6 +51,12 @@ const Contact = () => {
                         onSubmit={handleSubmit}
                         autoComplete='off'
                         className="contact__form">
+                        {isSuccess && (
+                            <div className="mb-4 rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm text-text">
+                                <i className="fa-sm fad fa-circle-check mr-2 text-green-500"></i>
+                                Message sent successfully. I’ll reply soon.
+                            </div>
+                        )}
                         <div className="flex-col flex md:flex-row md:gap-4 justify-evenly"
                         >
                             <div className="form-control">

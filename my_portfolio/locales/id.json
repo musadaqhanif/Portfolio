@@ -22,7 +22,16 @@
         "thank_you_message": "Terima kasih sudah mengunjungi ! 😊 Yuk, bagikan dengan teman-temanmu. 🎉",
         "share_link": "Bagikan Link",
         "link_copied": "Link Tersalin!",
-        "techstack": "Teknologi yang dipakai"
+        "techstack": "Teknologi yang dipakai",
+        "fiverrBadge": {
+            "title": "Fiverr",
+            "level": "Level 1 Seller",
+            "subtitle": "Mitra freelance terpercaya untuk hasil berkualitas.",
+            "rating": "Rating 5★",
+            "successRate": "tingkat keberhasilan",
+            "completedProjects": "proyek sukses",
+            "visitProfile": "Kunjungi profil Fiverr"
+        }
     },
     "About": {
         "title": "Tentang",
@@ -34,7 +43,38 @@
         "intro": "Hai, sayaMusadaq Hanif, seorang pengembang web full-stack yang bersemangat dengan kecintaan dalam menciptakan situs web yang dinamis dan ramah pengguna. Dengan pengalaman lebih dari 2 tahun di industri ini, saya mengkhususkan diri dalam pengembangan front-end dan memiliki perhatian yang tajam terhadap desain dan detail. Tujuan saya adalah untuk menciptakan situs web yang sempurna secara pixel yang tidak hanya memenuhi kebutuhan klien tetapi juga melebihi harapan mereka.",
         "journey": "Karier saya dalam pengembangan web dimulai selama tahun-tahun saya di Sekolah Menengah, di mana saya mengambil jurusan Teknik Perangkat Lunak. Pekerjaan pertama saya adalah di sebuah software-house kecil, di mana saya belajar dasar-dasar pengembangan web dan menemukan kecintaan saya terhadap coding. Selama bertahun-tahun, saya telah memiliki kesempatan untuk bekerja pada berbagai proyek yang menarik. Setiap pengalaman telah berkontribusi pada pertumbuhan saya sebagai pengembang dan telah membantu saya mengasah keterampilan saya.",
         "values": "Saya percaya pada pembelajaran berkelanjutan dan pengembangan diri. Saya didorong oleh keinginan untuk menciptakan situs web yang tidak hanya fungsional tetapi juga estetis menyenangkan. Pekerjaan saya dipandu oleh prinsip kesederhanaan, kegunaan, dan aksesibilitas. Saya berusaha untuk mengikuti tren dan teknologi terbaru dalam pengembangan web untuk memastikan bahwa keterampilan saya selalu mutakhir.",
-        "funfact": "Saya belum memiliki fakta menarik 😭."
+        "funfact": "Saya belum memiliki fakta menarik 😭.",
+        "aboutMeTitle": "Tentang Saya",
+        "aboutMeBody": "Hai, saya Musadaq Hanif, seorang Software Engineer & Full-Stack Developer yang bersemangat membangun aplikasi web yang skalabel, produk SaaS, aplikasi desktop, dan ekstensi Chrome. Saya juga berpengalaman mengintegrasikan AI dan machine learning untuk membuat solusi yang lebih cerdas dan berbasis data.",
+        "whatIDo": {
+            "title": "Apa yang Saya Kerjakan",
+            "items": [
+                "Membangun aplikasi web full-stack",
+                "Mengembangkan produk SaaS dan melakukan deployment end-to-end",
+                "Membuat aplikasi desktop dan ekstensi Chrome",
+                "Mengintegrasikan fitur AI/ML untuk pengalaman pengguna yang lebih cerdas",
+                "Menghasilkan solusi digital yang rapi, mudah dirawat, dan berfokus pada pengguna"
+            ]
+        },
+        "achievements": {
+            "title": "Pencapaian",
+            "items": [
+                "Mendirikan NeurixSolution.tech, mengembangkannya dari 0 hingga menjalankan proyek-proyek yang sukses",
+                "Meraih badge Level 1 Seller di Fiverr dalam 1 bulan",
+                "Menyelesaikan 19 proyek dengan rating 5 bintang dan 99% tingkat keberhasilan",
+                "Runner-Up Neutec Web Hackathon"
+            ]
+        },
+        "philosophy": {
+            "title": "Filosofi Saya",
+            "intro": "Saya percaya pada:",
+            "items": [
+                "Belajar terus-menerus dan selalu mengikuti teknologi terbaru",
+                "Membuat solusi yang fungsional, intuitif, dan menarik secara visual",
+                "Mengikuti prinsip kesederhanaan, usability, dan accessibility",
+                "Berkolaborasi dengan tim yang berpikiran maju untuk memecahkan masalah dunia nyata"
+            ]
+        }
     },
     "Services": {
         "title": "Layanan",

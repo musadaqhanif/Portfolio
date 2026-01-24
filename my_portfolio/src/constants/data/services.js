@@ -13,6 +13,18 @@ export const ServicesData = [
   },
   {
     id: 2,
+    icon: "pen-nib",
+    title: {
+      en: "Web Design",
+      id: "Desain Web",
+    },
+    description: {
+      en: "Modern UI/UX design for websites with clean layouts, strong visual hierarchy, and conversion-focused interfaces.",
+      id: "Desain UI/UX modern untuk website dengan layout rapi, hirarki visual kuat, dan antarmuka yang fokus pada konversi.",
+    }
+  },
+  {
+    id: 3,
     icon: "server",
     title: {
       en: "Website Hosting and Deployment",
@@ -24,19 +36,55 @@ export const ServicesData = [
     }
   },
   {
-    id: 3,
+    id: 4,
     icon: "brain",
     title: {
-      en: "Predictive Modeling and Machine Learning",
-      id: "Pemodelan Prediktif dan Machine Learning",
+      en: "Machine Learning & AI",
+      id: "Machine Learning & AI",
     },
     description: {
-      en: "Build data-driven solutions and predictive models using Python and modern data tools for actionable insights and automation. ",
-      id: "Mengembangkan model prediktif dan solusi berbasis data menggunakan Python, NumPy, Pandas, Scikit-learn, Matplotlib, dan Seaborn untuk wawasan bisnis dan otomatisasi.",
+      en: "AI/ML solutions for automation and insights, including predictive modeling, computer vision, and intelligent features for web apps and products.",
+      id: "Solusi AI/ML untuk otomatisasi dan insight, termasuk predictive modeling, computer vision, serta fitur cerdas untuk web app dan produk.",
     }
   },
   {
-    id: 4,
+    id: 5,
+    icon: "desktop",
+    title: {
+      en: "Desktop Application",
+      id: "Aplikasi Desktop",
+    },
+    description: {
+      en: "Windows desktop apps for automation and productivity (e.g., Electron-based tools, data extraction, and internal utilities).",
+      id: "Aplikasi desktop Windows untuk otomatisasi dan produktivitas (mis. tools berbasis Electron, data extraction, dan utilitas internal).",
+    }
+  },
+  {
+    id: 6,
+    icon: "puzzle-piece",
+    title: {
+      en: "Browser Extensions",
+      id: "Ekstensi Browser",
+    },
+    description: {
+      en: "Chrome/Browser extensions with modern standards (Manifest V3), automation, scraping, and productivity features.",
+      id: "Ekstensi Chrome/Browser dengan standar modern (Manifest V3), otomatisasi, scraping, dan fitur produktivitas.",
+    }
+  },
+  {
+    id: 7,
+    icon: "mobile",
+    title: {
+      en: "App Development",
+      id: "Pengembangan Aplikasi",
+    },
+    description: {
+      en: "Mobile app development focused on performance, clean UI, and maintainable codebases (based on your product needs).",
+      id: "Pengembangan aplikasi mobile dengan fokus pada performa, UI rapi, dan codebase yang mudah dirawat (sesuai kebutuhan produk Anda).",
+    }
+  },
+  {
+    id: 8,
     icon: "messages-question",
     title: {
       en: "Consulting",

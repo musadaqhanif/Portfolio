@@ -55,11 +55,12 @@ const Portfolio = ({ portfolios, locale }) => {
     }
   }, [locale, activeCategory, portfolios, t, getNoPortfolioMessage]);
 
-  const IconCategory = {
-    code: "fad fa-code-simple",
-    uiux: "fad fa-pen-nib",
-    design: "fad fa-palette",
-    others: "fad fa-grid-2-plus",
+  const iconByCategory = {
+    'web-development': "fad fa-globe",
+    'desktop-application': "fad fa-desktop",
+    'ml-ai': "fad fa-brain",
+    'chrome-extensions': "fad fa-puzzle-piece",
+    'web-design': "fad fa-pen-nib",
   };
 
   return (
@@ -75,6 +76,8 @@ const Portfolio = ({ portfolios, locale }) => {
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-5">
           {items.map((elem, index) => {
             const { id, thumbnail, thumbnailType, name, category, isFeatured, excerpt, slug, type } = elem;
+            // This prevents runtime crashes if a portfolio item has an unknown type.
+            const portfolioType = PORTFOLIO_TYPES[type] || PORTFOLIO_TYPES.personal;
             return (
               <motion.li
                 key={id || index}
@@ -96,7 +99,7 @@ const Portfolio = ({ portfolios, locale }) => {
                           </span>
                         )}
                         <div className="px-2 py-1 bg-orange-300 text-black rounded-md z-10">
-                          <i className={IconCategory[category] || "fad fa-circle-question"}></i>
+                          <i className={iconByCategory[category] || "fad fa-circle-question"}></i>
                         </div>
                       </div>
                       <div className="relative">
@@ -129,8 +132,8 @@ const Portfolio = ({ portfolios, locale }) => {
                     <div className="p-5 flex flex-col h-full gap-1 bg-container border border-stroke">
                       <div>
                         <p className="text-subtext text-xs flex gap-1 items-center mb-1">
-                          <span className="text-primary">{PORTFOLIO_TYPES[type].icon}</span>
-                          {PORTFOLIO_TYPES[type][locale]}
+                          <span className="text-primary">{portfolioType.icon}</span>
+                          {portfolioType[locale] || portfolioType.en}
                         </p>
                         <h2 className="font-semibold group-hover/portfolio:text-primary">
                           {name}

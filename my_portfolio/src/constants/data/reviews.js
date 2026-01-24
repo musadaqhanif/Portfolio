@@ -1,5 +1,25 @@
 export const reviews = [
   {
+    id: 1,
+    projectTitle: "ContaTaxPay.com Website",
+    projectSummary: "A comprehensive cloud-based SaaS platform for tax accounting and business management across Germany, Romania, and Moldova, delivering seamless accountant-client collaboration.",
+    projectLink: "https://contataxpay.com",
+    clientName: "ContaTaxPay.com",
+    clientRole: "Founder",
+    reviewType: "image",
+    reviewContent: "/images/sergiu1.png",
+    rating: 5,
+    date: "2025-12-15",
+    skill: [
+      { name: 'Next.js', icon: '<i class="devicon-nextjs-original colored"></i>' },
+      { name: 'React', icon: '<i class="devicon-react-original colored"></i>' },
+      { name: 'Node.js', icon: '<i class="devicon-nodejs-plain colored"></i>' },
+      { name: 'Express.js', icon: '<i class="devicon-express-original colored"></i>' },
+      { name: 'PostgreSQL', icon: '<i class="devicon-postgresql-plain colored"></i>' },
+    ]
+  },
+  
+  {
     "id": 4,
     "projectTitle": "GreenYasin.pk Website",
     "projectSummary": "A fully responsive and dynamic website for GreenYasin.pk, developed using the MERN stack to deliver a modern, scalable, and user-friendly online presence.",
