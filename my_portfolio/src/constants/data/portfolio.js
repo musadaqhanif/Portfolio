@@ -97,5 +97,10 @@ export const PORTFOLIO_TYPES = {
         icon: <BiCube/>,
         en: "SaaS Platform",
         id: "Platform SaaS"
+    },
+    'backend-security': {
+        icon: <BiBriefcase/>,
+        en: "Backend Security Project",
+        id: "Proyek Keamanan Backend"
     }
 };

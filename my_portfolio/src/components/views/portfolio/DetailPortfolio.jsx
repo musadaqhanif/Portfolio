@@ -13,6 +13,9 @@ const MDEditorPreview = dynamic(
 );
 
 const DetailPortfolio = ({ portfolio, locale }) => {
+    const category = PORTFOLIO_CATEGORIES[portfolio.category];
+    const type = PORTFOLIO_TYPES[portfolio.type];
+
     return (
         <article className=''>
             {/* Large background image or video */}
@@ -98,8 +101,8 @@ const DetailPortfolio = ({ portfolio, locale }) => {
             )}
 
             {/* Category and Type */}
-            <p className='text-sm text-subtext flex items-center gap-2'><BiChevronRight /> {locale == 'en' ? 'Category' : 'Kategori'}:  {PORTFOLIO_CATEGORIES[portfolio.category].reactIcon} {PORTFOLIO_CATEGORIES[portfolio.category].label[locale]}</p>
-            <p className='text-sm text-subtext flex items-center gap-2'><BiChevronRight /> {locale == 'en' ? 'Type' : 'Jenis'}: {PORTFOLIO_TYPES[portfolio.type].icon} {PORTFOLIO_TYPES[portfolio.type][locale]} </p>
+            <p className='text-sm text-subtext flex items-center gap-2'><BiChevronRight /> {locale == 'en' ? 'Category' : 'Kategori'}:  {category?.reactIcon} {category?.label?.[locale] || portfolio.category}</p>
+            <p className='text-sm text-subtext flex items-center gap-2'><BiChevronRight /> {locale == 'en' ? 'Type' : 'Jenis'}: {type?.icon} {type?.[locale] || portfolio.type} </p>
         </article>
     )
 }
