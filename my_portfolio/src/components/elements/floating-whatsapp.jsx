@@ -1,22 +1,21 @@
-import { RiWhatsappFill } from 'react-icons/ri'
-import { whatsappLink } from '@/constants/data/socials'
+import { RiWhatsappFill } from 'react-icons/ri';
 
-const FloatingWhatsapp = () => {
-  // This component renders a global floating WhatsApp contact button.
-  return (
-    <a
-      data-umami-event="Contact - Floating WhatsApp"
-      aria-label="Contact on WhatsApp"
-      href={whatsappLink}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-[9999] flex h-14 w-14 items-center justify-center rounded-full bg-[#25d366] text-white shadow-lg transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#25d366] focus:ring-offset-2 dark:focus:ring-offset-slate-950"
-      title="WhatsApp"
-    >
-      <RiWhatsappFill size={26} />
-    </a>
-  )
-}
+import { whatsappLink } from '@/constants/data/socials';
 
-export default FloatingWhatsapp
+const FloatingWhatsapp = () => (
+  <a
+    href={whatsappLink}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Message me on WhatsApp"
+    title="Message me on WhatsApp"
+    className="group fixed bottom-6 right-6 z-40 flex h-13 items-center gap-0 overflow-hidden rounded-full bg-[#25d366] px-3.5 py-3.5 text-white shadow-lift transition-all duration-300 ease-out hover:gap-2 hover:pr-5"
+  >
+    <RiWhatsappFill size={24} aria-hidden className="shrink-0" />
+    <span className="max-w-0 overflow-hidden whitespace-nowrap text-sm font-medium transition-all duration-300 ease-out group-hover:max-w-[9rem]">
+      Chat on WhatsApp
+    </span>
+  </a>
+);
 
+export default FloatingWhatsapp;

@@ -6,13 +6,9 @@
   NODE_VERSION = "18"
   NPM_VERSION = "9"
 
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
+# Security headers are defined once, in next.config.js `headers()`, so that the
+# Content-Security-Policy cannot drift between hosting providers. Do not re-add
+# them here: two CSP headers are enforced as an intersection, not a union.
 
 [[headers]]
   for = "/favicon/*"
@@ -45,7 +41,7 @@
   status = 200
 
 [context.production.environment]
-  NEXT_PUBLIC_SITE_URL = "https://musadaqhanif.com"
+  NEXT_PUBLIC_SITE_URL = "https://musadaq.live"
 
 [context.deploy-preview.environment]
-  NEXT_PUBLIC_SITE_URL = "https://musadaqhanif.com" 
+  NEXT_PUBLIC_SITE_URL = "https://musadaq.live" 

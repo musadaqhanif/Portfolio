@@ -1,18 +1,18 @@
-import Sidebar from './partials/Sidebar'
-import Overlay from './partials/Overlay'
-import FloatingWhatsapp from '@/components/elements/floating-whatsapp'
+import Navbar from './partials/Navbar';
+import Footer from './partials/Footer';
+import FloatingWhatsapp from '@/components/elements/floating-whatsapp';
+import RevealProvider from '@/components/elements/RevealProvider';
 
-const Layout = ({ children }) => {
-    return (
-        <>
-            <Sidebar />
-            <main className='group/main main ml-0 lg:ml-64 '>
-                <Overlay />
-                {children}
-            </main>
-            <FloatingWhatsapp />
-        </>
-    )
-}
+const Layout = ({ children }) => (
+  <div className="grain relative flex min-h-[100dvh] flex-col">
+    <RevealProvider />
+    <Navbar />
+    <main id="main" className="flex-1">
+      {children}
+    </main>
+    <Footer />
+    <FloatingWhatsapp />
+  </div>
+);
 
-export default Layout
+export default Layout;

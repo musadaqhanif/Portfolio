@@ -1,43 +1,15 @@
-import { useRouter } from "next/router";
-import { NextSeo } from "next-seo";
-import Homepage from "@/components/views/home/Home";
-import Head from "next/head";
+import Seo from '@/components/common/Seo';
+import Home from '@/components/views/home/Home';
 
-export default function Home() {
-
-  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
-  const { locale } = useRouter();
-  const lang = locale == 'en' ? '/en' : '';
+export default function HomePage() {
   return (
     <>
-      <NextSeo
-        title="Musadaq Hanif - Personal Website"
-        description="Musadaq Hanif is a passionate and versatile individual with a strong focus on web development. With expertise in Next.js, he creates dynamic and responsive websites that deliver seamless user experiences."
-        additionalLinkTags={[
-          { rel: 'alternate', hreflang: 'x-default', href: `${SITE_URL}` },
-          { rel: 'alternate', hreflang: 'id', href: `${SITE_URL}` },
-          { rel: 'alternate', hreflang: 'en', href: `${SITE_URL}/en` },
-        ]}
-        canonical={`${SITE_URL}${lang}`}
-        openGraph={{
-          url: `${SITE_URL}${lang}`,
-        }}
+      <Seo
+        title="Musadaq Hanif - Software Engineer & Full-Stack Developer"
+        description="I build production SaaS platforms, web applications and internal tools for founders and small teams. 20+ projects delivered across 5 countries."
+        path="/"
       />
-      <Head>
-        <link rel="preload" href="endless-clouds.svg" as="image" crossOrigin="anonymous"/>
-      </Head>
-      {/* <Toolbar /> */}
-      <div className="group-[.sidebar-expanded]/main:blur-[1px] z-[-1] bg-container border border-b border-stroke top-0 left-0 w-full h-[24vh] bg-endless-clouds"></div>
-      <section data-section className="group-[.sidebar-expanded]/main:blur-[2px] relative p-[15px] pl-5 mx-auto max-w-[1024px]">
-        <Homepage />
-      </section>
+      <Home />
     </>
   );
 }
-export const getStaticProps = async () => {
-
-  return {
-    props: {
-    },
-  };
-};

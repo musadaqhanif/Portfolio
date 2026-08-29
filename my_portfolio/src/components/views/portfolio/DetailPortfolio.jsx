@@ -1,110 +1,147 @@
-import Image from 'next/image';
-import dynamic from 'next/dynamic';
+import NextImage from 'next/image';
+import ReactMarkdown from 'react-markdown';
 import { BsGithub } from 'react-icons/bs';
-import { BiChevronRight, BiLinkExternal } from 'react-icons/bi';
+import { BiLinkExternal } from 'react-icons/bi';
 
+import BackLink from '@/components/common/BackLink';
 import { PORTFOLIO_CATEGORIES, PORTFOLIO_TYPES } from '@/constants/data/portfolio';
-import "@uiw/react-md-editor/markdown-editor.css";
-import "@uiw/react-markdown-preview/markdown.css";
 
-const MDEditorPreview = dynamic(
-    () => import("@uiw/react-markdown-preview").then((module) => module.default),
-    { ssr: false }
-);
+// A hash is used throughout the portfolio data to mean "no link available"
+// (private repository, NDA, or a demo that is not public).
+const hasLink = (value) => Boolean(value) && value !== '#';
 
-const DetailPortfolio = ({ portfolio, locale }) => {
-    const category = PORTFOLIO_CATEGORIES[portfolio.category];
-    const type = PORTFOLIO_TYPES[portfolio.type];
+const DetailPortfolio = ({ portfolio }) => {
+  const category = PORTFOLIO_CATEGORIES[portfolio.category];
+  const type = PORTFOLIO_TYPES[portfolio.type];
 
-    return (
-        <article className=''>
-            {/* Large background image or video */}
-            <div className="relative w-full h-64 sm:h-96 mb-6 rounded-xl overflow-hidden">
-                {portfolio.thumbnailType === 'video' ? (
-                    <video
-                        src={portfolio.thumbnail}
-                        className="w-full h-full object-cover"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                    />
-                ) : (
-                    <Image
-                        alt={portfolio.name}
-                        src={portfolio.thumbnail}
-                        fill
-                        style={{ objectFit: 'cover' }}
-                        className="w-full h-full object-cover"
-                        priority
-                    />
-                )}
-                <div className="absolute inset-0 bg-black bg-opacity-40 flex items-end p-6">
-                    <h1 className="text-3xl sm:text-4xl font-bold text-white drop-shadow-lg">{portfolio.name}</h1>
-                </div>
-            </div>
+  return (
+    <article>
+      <div className="shell pt-10">
+        <BackLink href="/portfolio" label="All work" />
+      </div>
 
-            {/* Short summary */}
-            <p className='text-lg text-subtext leading-6 mb-4'>{portfolio.excerpt}</p>
+      <header className="shell mt-8">
+        <div className="flex flex-wrap items-center gap-2">
+          {type && (
+            <span className="pill">
+              {type.icon}
+              {type.en}
+            </span>
+          )}
+          {category && <span className="pill">{category.label.en}</span>}
+        </div>
 
-            {/* Tech stack with icons */}
-            <div className='flex flex-wrap gap-3 items-center mb-6'>
-                {portfolio.skill && portfolio.skill.map((skill, index) => (
-                    <span className="badge text-base flex items-center gap-2 px-3 py-2 bg-gray-100 dark:bg-neutral-800" key={index}>
-                        <span dangerouslySetInnerHTML={{ __html: skill.icon }} /> {skill.name}
-                    </span>
+        <h1 className="mt-5 max-w-4xl text-headline font-semibold">{portfolio.name}</h1>
+        <p className="mt-5 max-w-prose text-base leading-relaxed text-muted sm:text-lg">
+          {portfolio.excerpt}
+        </p>
+
+        <div className="mt-8 flex flex-wrap gap-3">
+          {hasLink(portfolio.demoLink) && (
+            <a
+              href={portfolio.demoLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+            >
+              <BiLinkExternal aria-hidden />
+              Visit live site
+            </a>
+          )}
+          {hasLink(portfolio.githubLink) && (
+            <a
+              href={portfolio.githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-ghost"
+            >
+              <BsGithub aria-hidden />
+              Source code
+            </a>
+          )}
+        </div>
+      </header>
+
+      <div className="shell mt-12">
+        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-line bg-elevated">
+          {portfolio.thumbnailType === 'video' ? (
+            <video
+              src={portfolio.thumbnail}
+              className="h-full w-full object-cover"
+              autoPlay
+              loop
+              muted
+              playsInline
+              aria-label={portfolio.name}
+            />
+          ) : (
+            <NextImage
+              alt={portfolio.name}
+              src={portfolio.thumbnail}
+              fill
+              priority
+              sizes="(max-width: 1180px) 100vw, 1180px"
+              className="object-cover"
+            />
+          )}
+        </div>
+      </div>
+
+      <div className="shell mt-14 grid gap-12 pb-4 lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-16">
+        <div className="markdown-body min-w-0">
+          {portfolio.content && <ReactMarkdown>{portfolio.content}</ReactMarkdown>}
+        </div>
+
+        <aside className="lg:sticky lg:top-28 lg:self-start">
+          {portfolio.skill?.length > 0 && (
+            <section>
+              <h2 className="text-xs font-medium uppercase tracking-[0.18em] text-faint">
+                Built with
+              </h2>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {portfolio.skill.map((skill) => (
+                  <li key={skill.name} className="pill">
+                    {/* Icon markup comes from our own constants file, never user input. */}
+                    <span dangerouslySetInnerHTML={{ __html: skill.icon }} />
+                    {skill.name}
+                  </li>
                 ))}
-            </div>
+              </ul>
+            </section>
+          )}
 
-            {/* Demo and Source Code links */}
-            <div className="flex item-center gap-2 mb-6">
-                {portfolio.demoLink &&
-                    <a data-umami-event={`Click Live Demo - ${portfolio.name}`} href={portfolio.demoLink} className="badge text-sm" target="_blank" rel="noopener noreferrer">
-                        <BiLinkExternal /> {locale == 'en' ? 'Live Demo' : 'Demo Langsung'}
-                    </a>
-                }
-                {portfolio.githubLink &&
-                    <a data-umami-event={`Click Source Code - ${portfolio.name}`} href={portfolio.githubLink} className={`badge text-sm`} target="_blank" rel="noopener noreferrer">
-                        <BsGithub /> {locale == 'en' ? 'Source Code' : 'Kode Sumber'}
-                    </a>
-                }
-            </div>
-
-            {/* Review section */}
-            <div className="mb-8">
-                <h2 className="text-xl font-semibold mb-2">Review</h2>
-                {portfolio.review && portfolio.review.type === 'text' && (
-                    <div className="p-4 bg-gray-50 dark:bg-neutral-900 rounded-lg text-base italic">{portfolio.review.value}</div>
+          {portfolio.review && (
+            <section className="mt-10">
+              <h2 className="text-xs font-medium uppercase tracking-[0.18em] text-faint">
+                Client review
+              </h2>
+              <div className="mt-4">
+                {portfolio.review.type === 'text' && (
+                  <blockquote className="card p-5 text-sm italic leading-relaxed text-muted">
+                    {portfolio.review.value}
+                  </blockquote>
                 )}
-                {portfolio.review && portfolio.review.type === 'image' && (
-                    <div className="flex justify-center">
-                        <Image src={portfolio.review.value} alt="Review" width={400} height={250} className="rounded-lg" />
-                    </div>
+                {portfolio.review.type === 'image' && (
+                  <NextImage
+                    src={portfolio.review.value}
+                    alt="Client review"
+                    width={400}
+                    height={250}
+                    className="rounded-xl border border-line"
+                  />
                 )}
-                {portfolio.review && portfolio.review.type === 'video' && (
-                    <div className="flex justify-center">
-                        <video controls width="400" className="rounded-lg">
-                            <source src={portfolio.review.value} type="video/mp4" />
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
+                {portfolio.review.type === 'video' && (
+                  <video controls className="w-full rounded-xl border border-line">
+                    <source src={portfolio.review.value} type="video/mp4" />
+                  </video>
                 )}
-            </div>
+              </div>
+            </section>
+          )}
+        </aside>
+      </div>
+    </article>
+  );
+};
 
-            {/* Markdown content (optional) */}
-            {portfolio.content && (
-                <MDEditorPreview
-                    source={portfolio.content}
-                    className="md:p-4 rounded-lg mb-3"
-                />
-            )}
-
-            {/* Category and Type */}
-            <p className='text-sm text-subtext flex items-center gap-2'><BiChevronRight /> {locale == 'en' ? 'Category' : 'Kategori'}:  {category?.reactIcon} {category?.label?.[locale] || portfolio.category}</p>
-            <p className='text-sm text-subtext flex items-center gap-2'><BiChevronRight /> {locale == 'en' ? 'Type' : 'Jenis'}: {type?.icon} {type?.[locale] || portfolio.type} </p>
-        </article>
-    )
-}
-
-export default DetailPortfolio
+export default DetailPortfolio;

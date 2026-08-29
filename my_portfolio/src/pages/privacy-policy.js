@@ -1,80 +1,55 @@
-import { useRouter } from 'next/router';
-import { HiShieldCheck } from 'react-icons/hi';
-import { useTranslations } from 'next-intl';
-import { NextSeo } from 'next-seo';
+import Seo from '@/components/common/Seo';
+import PageHeader from '@/components/common/PageHeader';
+import { PAGE_COPY } from '@/constants/copy';
+import { CONTACT_EMAIL } from '@/constants/site';
 
-import PageHeading from '@/components/common/PageHeading';
-import Container from '@/components/layouts/partials/Container';
+const SECTIONS = [
+  {
+    title: 'What I collect',
+    body: 'Only what you type into the contact form: your name, your email address and your message. Nothing else is collected, and there is no account system, no advertising and no tracking pixels.',
+  },
+  {
+    title: 'How it is used',
+    body: 'Your message is delivered to my inbox through EmailJS so I can reply to you. It is not sold, shared or added to any mailing list.',
+  },
+  {
+    title: 'Third-party scripts',
+    body: 'This site loads no third-party JavaScript. A Content-Security-Policy blocks scripts from any origin other than this one, so no external service can execute code in your browser while you are here.',
+  },
+  {
+    title: 'Cookies',
+    body: 'No tracking cookies are set. Your light or dark theme preference is stored locally in your own browser and never leaves your device.',
+  },
+];
 
-const PrivacyPolicyPage = () => {
-    const t = useTranslations('Privacy');
-    const { locale, pathname } = useRouter();
-    const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
-    const lang = locale == 'en' ? '/en' : ''
-    const currentPageURL = `${SITE_URL}${lang}${pathname}`
+export default function PrivacyPolicyPage() {
+  const copy = PAGE_COPY.privacy;
+  return (
+    <>
+      <Seo title={copy.title} description={copy.metaDesc} path="/privacy-policy" />
+      <PageHeader eyebrow="Legal" title={copy.title} subtitle={copy.subtitle} />
 
-    return (
-        <>
-            <NextSeo
-                title={`${t('title')} -Musadaq Hanif`}
-                description={t('metaDesc')}
-                additionalLinkTags={[
-                    { rel: 'alternate', hreflang: 'x-default', href: `${SITE_URL}${pathname}` },
-                    { rel: 'alternate', hreflang: 'id', href: `${SITE_URL}${pathname}` },
-                    { rel: 'alternate', hreflang: 'en', href: `${SITE_URL}/en${pathname}` },
-                ]}
-                canonical={currentPageURL}
-                openGraph={{
-                    url: currentPageURL,
-                }}
-            />
+      <div className="shell py-14">
+        <div className="max-w-prose space-y-10">
+          {SECTIONS.map((section) => (
+            <section key={section.title}>
+              <h2 className="text-lg font-semibold text-ink">{section.title}</h2>
+              <p className="mt-3 text-sm leading-relaxed text-muted">{section.body}</p>
+            </section>
+          ))}
 
-            <Container data-aos="fade-up" >
-                <PageHeading
-                    title={t('title')}
-                    description={t('subtitle')}
-                    className="text-center mb-8"
-                />
-                <div className='flex flex-col gap-4'>
-                    <div>
-                        <div className="flex items-center space-x-2">
-                            <HiShieldCheck className="text-green-500 text-xl mb-1" />
-                            <h2 className="text-xl text-text font-semibold">{t('subtitles.information_collected')}</h2>
-                        </div>
-                        <p className="text-subtext-700">{t('information_collected')}</p>
-                    </div>
-                    <div>
-                        <div className="flex items-center space-x-2">
-                            <HiShieldCheck className="text-blue-500 text-xl mb-1" />
-                            <h2 className="text-xl text-text font-semibold">{t('subtitles.usage')}</h2>
-                        </div>
-                        <p className="text-subtext-700">{t('usage')}</p>
-                    </div>
-                    <div>
-                        <div className="flex items-center space-x-2">
-                            <HiShieldCheck className="text-yellow-500 text-xl mb-1" />
-                            <h2 className="text-xl text-text font-semibold">{t('subtitles.security')}</h2>
-                        </div>
-                        <p className="text-subtext-700">{t('security')}</p>
-                    </div>
-
-                    <div>
-                        <div className="flex items-center space-x-2">
-                            <HiShieldCheck className="text-red-500 text-xl mb-1" />
-                            <h2 className="text-xl text-text font-semibold">{t('subtitles.contact')}  </h2>
-                        </div>
-                        <p className="text-subtext-700">{t('contact')} <a href='mailto:hello@dwiwijaya.com' className='text-primary'>hello@dwiwijaya.com</a>. </p>
-                    </div>
-                </div>
-            </Container>
-        </>
-    );
-};
-
-export default PrivacyPolicyPage;
-
-export const getStaticProps = async () => {
-    return {
-        props: {},
-    };
-};
+          <section>
+            <h2 className="text-lg font-semibold text-ink">Questions</h2>
+            <p className="mt-3 text-sm leading-relaxed text-muted">
+              Email me at{' '}
+              <a href={`mailto:${CONTACT_EMAIL}`} className="link">
+                {CONTACT_EMAIL}
+              </a>
+              .
+            </p>
+          </section>
+        </div>
+      </div>
+    </>
+  );
+}

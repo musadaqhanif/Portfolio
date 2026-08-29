@@ -1,52 +1,15 @@
-import { useRouter } from 'next/router';
-import { useTranslations } from 'next-intl';
-import { NextSeo } from 'next-seo';
+import Seo from '@/components/common/Seo';
+import PageHeader from '@/components/common/PageHeader';
+import Experience from '@/components/views/experience/Experience';
+import { PAGE_COPY } from '@/constants/copy';
 
-import { experience } from '@/constants/data/experience';
-import PageHeading from '@/components/common/PageHeading';
-import Container from '@/components/layouts/partials/Container'
-import Experience from '@/components/views/experience/Experience'
-
-const ExperiencePage = ({ experience }) => {
-
-    const t = useTranslations('Experience');
-    const { locale, pathname } = useRouter();
-    const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
-    const lang = locale == 'en' ? '/en' : ''
-    const currentPageURL = `${SITE_URL}${lang}${pathname}`
-
-    return (
-        <>
-            <NextSeo
-                title={`${t('title')} -Musadaq Hanif`}
-                description={t('metaDesc')}
-                additionalLinkTags={[
-                    { rel: 'alternate', hreflang: 'x-default', href: `${SITE_URL}${pathname}` },
-                    { rel: 'alternate', hreflang: 'id', href: `${SITE_URL}${pathname}` },
-                    { rel: 'alternate', hreflang: 'en', href: `${SITE_URL}/en${pathname}` },
-                ]}
-                canonical={currentPageURL}
-                openGraph={{
-                    url: currentPageURL,
-                }}
-            />
-            <Container data-aos='fade-up'>
-                <PageHeading
-                    title={t('title')}
-                    description={t('subtitle')}
-                />
-                <Experience experience={experience} locale={locale} />
-            </Container>
-        </>
-    )
+export default function ExperiencePage() {
+  const copy = PAGE_COPY.experience;
+  return (
+    <>
+      <Seo title={copy.title} description={copy.metaDesc} path="/experience" />
+      <PageHeader eyebrow="Background" title={copy.title} subtitle={copy.subtitle} />
+      <Experience />
+    </>
+  );
 }
-
-export default ExperiencePage
-export const getStaticProps = async () => {
-    return {
-        props: {
-            experience
-        },
-        revalidate: 3600,
-    };
-};

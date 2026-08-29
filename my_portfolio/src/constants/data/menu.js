@@ -1,74 +1,22 @@
+/**
+ * Primary navigation.
+ *
+ * Deliberately short. A visitor evaluating whether to hire someone needs the
+ * work, the offer, the proof and a way to make contact - everything else is a
+ * secondary page and lives in the footer instead.
+ */
 export const MENU_ITEMS = [
-    {
-        href: "/",
-        iconClass: "fad fa-home",
-        label: {
-            en: "Home",
-            id: "Beranda",
-        },
-    },
-    {
-        href: "/about",
-        iconClass: "fad fa-user",
-        label: {
-            en: "About",
-            id: "Tentang",
-        },
-    },
-    {
-        href: "/skillset",
-        iconClass: "fad fa-rectangle-code",
-        label: {
-            en: "Skillset",
-            id: "Keahlian",
-        },
-    },
-    {
-        href: "/portfolio",
-        iconClass: "fad fa-layer-group",
-        label: {
-            en: "Portfolio",
-            id: "Portofolio",
-        },
-    },
-    {
-        href: "/reviews",
-        iconClass: "fad fa-star",
-        label: {
-            en: "Reviews",
-            id: "Ulasan",
-        },
-    },
-    {
-        href: "/services",
-        iconClass: "fad fa-briefcase",
-        label: {
-            en: "Services",
-            id: "Layanan",
-        },
-    },
-    {
-        href: "/experience",
-        iconClass: "fad fa-graduation-cap",
-        label: {
-            en: "Experience",
-            id: "Pengalaman",
-        },
-    },
-    {
-        href: "/blog",
-        iconClass: "fad fa-rss",
-        label: {
-            en: "Blog",
-            id: "Blog",
-        },
-    },
-    {
-        href: "/contact",
-        iconClass: "fad fa-envelope",
-        label: {
-            en: "Contact",
-            id: "Kontak",
-        },
-    },
+  { href: '/', label: 'Home' },
+  { href: '/portfolio', label: 'Work' },
+  { href: '/services', label: 'Services' },
+  { href: '/reviews', label: 'Reviews' },
+  { href: '/about', label: 'About' },
+];
+
+/** Secondary pages: reachable, but not competing for attention in the header. */
+export const FOOTER_ITEMS = [
+  { href: '/experience', label: 'Experience' },
+  { href: '/skillset', label: 'Skillset' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/privacy-policy', label: 'Privacy' },
 ];

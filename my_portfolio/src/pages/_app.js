@@ -1,87 +1,64 @@
-import { useEffect } from "react";
-import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
+import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { Onest } from 'next/font/google';
-import { ThemeProvider } from "next-themes";
-import { NextIntlClientProvider } from 'next-intl';
+import { ThemeProvider } from 'next-themes';
 
-import { Toaster } from "react-hot-toast";
-import { DefaultSeo } from "next-seo";
-import Aos from "aos";
+import { Toaster } from 'react-hot-toast';
+import { DefaultSeo } from 'next-seo';
+import Aos from 'aos';
 
-import Layout from "@/components/layouts/Layout";
+import Layout from '@/components/layouts/Layout';
 
-import "@/styles/vendor/fa.min-1.css";
-import "@/styles/vendor/fa.min-2.css";
-import "@/styles/vendor/markdown.css";
-import "@/styles/vendor/slick.css";
-import "@/styles/globals.css";
-import "aos/dist/aos.css";
+import '@/styles/vendor/fa.min-1.css';
+import '@/styles/vendor/fa.min-2.css';
+import '@/styles/globals.css';
+import 'aos/dist/aos.css';
 
-import getDefaultSEOConfig from "../../next-seo.config";
+import defaultSEOConfig from '../../next-seo.config';
 
+// next/font self-hosts the font files at build time, so no request ever leaves
+// the origin for typography. This also keeps font-src 'self' in the CSP.
 const onest = Onest({
   subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sans',
 });
 
-const ProgressBar = dynamic(
-  () => import('../components/elements/ProgressBar'),
-  { ssr: false }
-);
+const ProgressBar = dynamic(() => import('@/components/elements/ProgressBar'), {
+  ssr: false,
+});
 
-export default function App({ Component, pageProps, messages }) {
-  const router = useRouter();
-  const seoConfig = getDefaultSEOConfig(router.locale);
+export default function App({ Component, pageProps }) {
   useEffect(() => {
-    Aos.init({
-      duration: 400,
-      delay: 0,
-      once: true,
-      easing: 'ease-out',
-      offset: 50,
-    });
+    Aos.init({ duration: 500, delay: 0, once: true, easing: 'ease-out', offset: 60 });
   }, []);
-  
 
-  return <>
-    <NextIntlClientProvider
-      locale={router.locale}
-      timeZone="Asia/Jakarta"
-      messages={messages}
+  return (
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="dark"
+      enableSystem
+      disableTransitionOnChange
     >
-
-      <DefaultSeo {...seoConfig} />
-
-      <style jsx global>
-        {`
-          html {
-            font-family: ${onest.style.fontFamily};
-          }
-        `}
-      </style>
-
-      <Toaster
-        toastOptions={{
-          style: {
-            background: "var(--container-color)",
-            color: "var(--text-color)",
-          },
-        }}
-        position="top-right"
-      />
-
-      <ThemeProvider attribute='class' enableSystem={false} disableTransitionOnChange={true} scriptProps={{ 'data-cfasync': 'false' }}>
+      <div className={`${onest.variable} font-sans`}>
+        <DefaultSeo {...defaultSEOConfig} />
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            style: {
+              background: 'var(--surface)',
+              color: 'var(--text)',
+              border: '1px solid var(--border)',
+              borderRadius: '12px',
+              fontSize: '14px',
+            },
+          }}
+        />
+        <ProgressBar />
         <Layout>
-          <ProgressBar />
           <Component {...pageProps} />
         </Layout>
-      </ThemeProvider>
-    </NextIntlClientProvider>
-  </>
+      </div>
+    </ThemeProvider>
+  );
 }
-App.getInitialProps = async ({ router }) => {
-  const { locale } = router;
-
-  const messages = (await import(`../../locales/${locale}.json`)).default
-  return { messages };
-};

@@ -1,234 +1,158 @@
-import { FaStar, FaExternalLinkAlt } from 'react-icons/fa';
-import { BiUser, BiCalendar } from 'react-icons/bi';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import NextImage from 'next/image';
 
-const Reviews = ({ reviews }) => {
-    const [activeImage, setActiveImage] = useState(null);
+import { reviews } from '@/constants/data/reviews';
 
-    useEffect(() => {
-        if (!activeImage) return;
+const Stars = ({ rating = 5 }) => (
+  <div className="flex gap-0.5" aria-label={`Rated ${rating} out of 5`}>
+    {Array.from({ length: 5 }, (_, i) => (
+      <svg
+        key={i}
+        viewBox="0 0 24 24"
+        className={`h-3.5 w-3.5 ${i < rating ? 'text-accent' : 'text-line'}`}
+        fill="currentColor"
+        aria-hidden
+      >
+        <path d="M12 2l2.9 6.2 6.6.9-4.8 4.7 1.2 6.7L12 17.4 6.1 20.5l1.2-6.7L2.5 9.1l6.6-.9z" />
+      </svg>
+    ))}
+  </div>
+);
 
-        const handleKeyDown = (e) => {
-            if (e.key === 'Escape') setActiveImage(null);
-        };
+const hasLink = (value) => Boolean(value) && value !== '#';
 
-        document.addEventListener('keydown', handleKeyDown);
-        document.body.style.overflow = 'hidden';
-
-        return () => {
-            document.removeEventListener('keydown', handleKeyDown);
-            document.body.style.overflow = '';
-        };
-    }, [activeImage]);
-
-    const renderReviewContent = (review) => {
-        switch (review.reviewType) {
-            case 'text':
-                return (
-                    <div className="bg-background border border-stroke p-4 rounded-xl">
-                        <p className="text-text leading-relaxed italic">
-                            &quot;{review.reviewContent}&quot;
-                        </p>
-
-                    </div>
-                );
-            case 'image':
-                return (
-                    <div className="w-full">
-                        <a
-                            href={review.reviewContent}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setActiveImage({ src: review.reviewContent, title: review.projectTitle });
-                            }}
-                            aria-label={`Zoom review image for ${review.projectTitle}`}
-                            className="group block w-full"
-                        >
-                            <div className="relative overflow-hidden rounded-xl border border-stroke bg-background">
-                                <div className="relative h-[360px] sm:h-[480px] lg:h-[560px]">
-                                    <Image
-                                        src={review.reviewContent}
-                                        alt={`Review for ${review.projectTitle}`}
-                                        fill
-                                        style={{ objectFit: 'contain' }}
-                                        className="cursor-zoom-in p-3"
-                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 720px"
-                                        priority={false}
-                                    />
-                                </div>
-
-                                <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-2 bg-gradient-to-t from-black/40 to-transparent p-3 opacity-100">
-                                    <span className="text-xs text-white/90">
-                                        Click to zoom
-                                    </span>
-                                    <span className="rounded-md bg-black/30 px-2 py-1 text-xs text-white/90">
-                                        Zoom
-                                    </span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                );
-            case 'video':
-                return (
-                    <div className="relative w-full max-w-md mx-auto">
-                        <div className="relative aspect-video rounded-lg overflow-hidden shadow-lg">
-                            <iframe
-                                src={review.reviewContent}
-                                title={`Review video for ${review.projectTitle}`}
-                                className="w-full h-full"
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                            ></iframe>
-                        </div>
-                    </div>
-                );
-            default:
-                return null;
-        }
-    };
-
-    const renderStars = (rating) => {
-        return Array.from({ length: 5 }, (_, index) => (
-            <FaStar
-                key={index}
-                className={`w-4 h-4 ${index < rating
-                        ? 'text-yellow-400 fill-current'
-                        : 'text-gray-300 dark:text-gray-600'
-                    }`}
-            />
-        ));
-    };
-
+const ReviewBody = ({ review, onExpand }) => {
+  if (review.reviewType === 'text') {
     return (
-        <>
-            {activeImage && (
-                <div
-                    className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 p-4"
-                    role="dialog"
-                    aria-modal="true"
-                    aria-label="Review image preview"
-                    onClick={() => setActiveImage(null)}
-                >
-                    <div
-                        className="relative w-full max-w-5xl overflow-hidden rounded-2xl border border-stroke bg-container shadow-2xl"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <div className="flex items-center justify-between gap-3 border-b border-stroke px-4 py-3">
-                            <p className="text-title font-semibold truncate">{activeImage.title}</p>
-                            <div className="flex items-center gap-2">
-                                <a
-                                    href={activeImage.src}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="badge !py-2 !px-3 hover:opacity-80"
-                                >
-                                    <FaExternalLinkAlt className="w-3 h-3 text-primary" />
-                                    <span className="text-sm">Open</span>
-                                </a>
-                                <button
-                                    type="button"
-                                    onClick={() => setActiveImage(null)}
-                                    className="badge !py-2 !px-3 hover:opacity-80"
-                                    aria-label="Close preview"
-                                >
-                                    <span className="text-sm">Close</span>
-                                    <i className="fa-sm fad fa-xmark text-primary"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div className="relative h-[70vh] bg-background">
-                            <Image
-                                src={activeImage.src}
-                                alt={`Review for ${activeImage.title}`}
-                                fill
-                                style={{ objectFit: 'contain' }}
-                                className="p-4"
-                                sizes="100vw"
-                                priority={false}
-                            />
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            <div className="grid gap-8">
-            {reviews.map((review) => (
-                <div key={review.id} className="bg-container rounded-xl shadow-lg overflow-hidden border border-stroke">
-                    <div className="p-6">
-                        {/* Project Header */}
-                        <div className="flex items-start justify-between mb-4">
-                            <div className="flex-1">
-                                <h3 className="text-xl font-bold text-title mb-2">
-                                    {review.projectTitle}
-                                </h3>
-                                <p className="text-text text-sm leading-relaxed mb-3">
-                                    {review.projectSummary}
-                                </p>
-                                <div className="flex items-center gap-4 text-xs text-subtext">
-                                    <div className="flex items-center gap-1">
-                                        <BiCalendar className="w-4 h-4" />
-                                        <span>{review.date}</span>
-                                    </div>
-                                    <div className="flex items-center gap-1">
-                                        <BiUser className="w-4 h-4" />
-                                        <span>{review.clientName} - {review.clientRole}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="flex flex-col items-end gap-2">
-                                <div className="flex items-center gap-1">
-                                    {renderStars(review.rating)}
-                                </div>
-                                {review.projectLink && review.projectLink !== '#' && (
-                                    <a
-                                        href={review.projectLink}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center gap-1 text-primary hover:opacity-80 text-sm font-medium transition-colors duration-200"
-                                    >
-                                        <span>View Project</span>
-                                        <FaExternalLinkAlt className="w-3 h-3" />
-                                    </a>
-                                )}
-                            </div>
-                        </div>
-
-                        {/* Review Content */}
-                        <div className="mt-6">
-                            {renderReviewContent(review)}
-                        </div>
-
-                        {/* Client Info */}
-                        <div className="mt-4 pt-4 border-t border-stroke">
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="font-semibold text-title">
-                                        {review.clientName}
-                                    </p>
-                                    <p className="text-sm text-subtext">
-                                        {review.clientRole}
-                                    </p>
-                                </div>
-                                <div className="text-right">
-                                    <div className="flex items-center gap-1 mb-1">
-                                        {renderStars(review.rating)}
-                                    </div>
-                                    <p className="text-xs text-subtext">
-                                        {review.rating}/5 rating
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            ))}
-            </div>
-        </>
+      <blockquote className="text-sm leading-relaxed text-muted">
+        &ldquo;{review.reviewContent}&rdquo;
+      </blockquote>
     );
+  }
+
+  if (review.reviewType === 'video') {
+    return (
+      <div className="overflow-hidden rounded-xl border border-line">
+        <iframe
+          src={review.reviewContent}
+          title={`Video review for ${review.projectTitle}`}
+          className="aspect-video w-full"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      </div>
+    );
+  }
+
+  // Image: a screenshot of the original review. Click to view it full size.
+  return (
+    <button
+      type="button"
+      onClick={onExpand}
+      className="group relative block w-full overflow-hidden rounded-xl border border-line bg-elevated"
+      aria-label="View full-size review screenshot"
+    >
+      <NextImage
+        src={review.reviewContent}
+        alt={`Review from ${review.clientName}`}
+        width={800}
+        height={500}
+        className="h-auto w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+      />
+      <span className="absolute bottom-2 right-2 rounded-full bg-bg/90 px-2.5 py-1 text-[0.65rem] text-muted backdrop-blur">
+        Click to enlarge
+      </span>
+    </button>
+  );
 };
 
-export default Reviews; 
+const Reviews = () => {
+  const [lightbox, setLightbox] = useState(null);
+
+  if (!reviews?.length) return null;
+
+  return (
+    <>
+      <section className="shell py-14">
+        <ul className="grid gap-6 lg:grid-cols-2">
+          {reviews.map((review) => (
+            <li key={review.id} className="card flex flex-col p-7">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <h2 className="font-semibold text-ink">{review.projectTitle}</h2>
+                  <p className="mt-1 text-xs text-faint">
+                    {review.clientName} &middot; {review.clientRole}
+                  </p>
+                </div>
+                <Stars rating={review.rating} />
+              </div>
+
+              {review.projectSummary && (
+                <p className="mt-4 text-sm leading-relaxed text-muted">
+                  {review.projectSummary}
+                </p>
+              )}
+
+              <div className="mt-5 flex-1">
+                <ReviewBody review={review} onExpand={() => setLightbox(review)} />
+              </div>
+
+              {review.skill?.length > 0 && (
+                <ul className="mt-5 flex flex-wrap gap-2">
+                  {review.skill.map((skill) => (
+                    <li key={skill.name} className="pill">
+                      {/* Icon markup comes from our own constants file, never user input. */}
+                      <span dangerouslySetInnerHTML={{ __html: skill.icon }} />
+                      {skill.name}
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {hasLink(review.projectLink) && (
+                <a
+                  href={review.projectLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex items-center gap-2 border-t border-line pt-5 text-sm font-medium text-accent"
+                >
+                  Visit the live project
+                  <span aria-hidden>&rarr;</span>
+                </a>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {lightbox && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Review from ${lightbox.clientName}`}
+          onClick={() => setLightbox(null)}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-5 backdrop-blur-sm"
+        >
+          <button
+            type="button"
+            onClick={() => setLightbox(null)}
+            aria-label="Close"
+            className="absolute right-5 top-5 grid h-10 w-10 place-items-center rounded-full border border-white/25 text-xl text-white"
+          >
+            &times;
+          </button>
+          <NextImage
+            src={lightbox.reviewContent}
+            alt={`Review from ${lightbox.clientName}`}
+            width={1400}
+            height={900}
+            className="max-h-[85vh] w-auto rounded-xl object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+    </>
+  );
+};
+
+export default Reviews;

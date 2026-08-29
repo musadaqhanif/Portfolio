@@ -1,23 +1,22 @@
-import Link from 'next/link'
-import { NextSeo } from 'next-seo'
-import Container from '@/components/layouts/partials/Container'
+import Link from 'next/link';
 
-const Custom404 = () => {
-    return (
-        <Container>
-            <NextSeo title="404 - Page Not Found" />
-            <section className="">
-                <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 mt-14">
-                    <div className="mx-auto max-w-screen-sm text-center">
-                        <h1 className="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-primary dark:text-primary-500">404</h1>
-                        <p className="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl dark:text-white">Something&apos;s missing.</p>
-                        <p className="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">Sorry, we can&apos;t find that page. You&apos;ll find lots to explore on the home page. </p>
-                        <Link href="/" className="btn !inline-flex">Back to Homepage</Link>
-                    </div>
-                </div>
-            </section>
-        </Container>
-    )
+import Seo from '@/components/common/Seo';
+
+export default function NotFound() {
+  return (
+    <>
+      <Seo title="Page not found" description="This page does not exist." path="/404" noindex />
+      <div className="shell flex min-h-[60vh] flex-col items-center justify-center py-20 text-center">
+        <span className="font-mono text-sm text-accent">404</span>
+        <h1 className="mt-4 text-headline font-semibold">This page does not exist.</h1>
+        <p className="mt-4 max-w-prose text-base text-muted">
+          The link may be out of date, or the page may have moved.
+        </p>
+        <div className="mt-9 flex flex-wrap justify-center gap-3">
+          <Link href="/" className="btn-primary">Back to home</Link>
+          <Link href="/portfolio" className="btn-ghost">See the work</Link>
+        </div>
+      </div>
+    </>
+  );
 }
-
-export default Custom404

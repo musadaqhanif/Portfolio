@@ -1,97 +1,65 @@
-import { useTranslations } from 'next-intl';
-import PageSubHeading from '../../common/PageSubHeading';
+import Link from 'next/link';
+
+import { PAGE_COPY } from '@/constants/copy';
+import { STATS } from '@/constants/data/highlights';
+
+const List = ({ items }) => (
+  <ul className="mt-5 space-y-3">
+    {items.map((item) => (
+      <li key={item} className="flex gap-3">
+        <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
+        <span className="text-sm leading-relaxed text-muted">{item}</span>
+      </li>
+    ))}
+  </ul>
+);
 
 const About = () => {
-  const t = useTranslations();
-  const raw = typeof t.raw === 'function' ? t.raw : () => [];
-  const whatIDoItems = raw('About.whatIDo.items');
-  const achievementsItems = raw('About.achievements.items');
-  const philosophyItems = raw('About.philosophy.items');
-
-  // This helper ensures list rendering doesn't break if translations are missing.
-  const toStringArray = (value) => (Array.isArray(value) ? value.filter(Boolean) : []);
-
-  // This component renders a modern bullet list item with icon.
-  const BulletItem = ({ children, icon = 'fa-check' }) => {
-    return (
-      <li className="flex gap-3">
-        <span className="mt-[2px] inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-stroke bg-[var(--primary-bg)] text-primary">
-          <i className={`fa-xs fad ${icon}`}></i>
-        </span>
-        <span className="text-text text-sm leading-relaxed">{children}</span>
-      </li>
-    );
-  };
+  const copy = PAGE_COPY.about;
 
   return (
     <>
-      <div className="about-page">
-        <div className="grid gap-6 lg:grid-cols-12">
-          <section className="card lg:col-span-5 !p-6">
-            <PageSubHeading icon="fad fa-user" title={t('About.aboutMeTitle')} />
-            <p className="text-text text-sm leading-relaxed">{t('About.aboutMeBody')}</p>
+      <section className="shell py-14">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-16">
+          <div className="max-w-prose">
+            <p className="text-lg leading-relaxed text-ink">{copy.intro}</p>
 
-            <div className="mt-5 grid grid-cols-2 gap-3">
-              <div className="badge !justify-center !py-2">
-                <i className="fad fa-diagram-project text-primary"></i>
-                <span className="text-sm text-text">19</span>
-                <span className="text-sm text-subtext">Projects</span>
-              </div>
-              <div className="badge !justify-center !py-2">
-                <i className="fad fa-stars text-primary"></i>
-                <span className="text-sm text-text">5★</span>
-                <span className="text-sm text-subtext">Rating</span>
-              </div>
-              <div className="badge !justify-center !py-2">
-                <i className="fad fa-badge-check text-primary"></i>
-                <span className="text-sm text-text">99%</span>
-                <span className="text-sm text-subtext">Success</span>
-              </div>
-              <div className="badge !justify-center !py-2">
-                <i className="fad fa-handshake text-primary"></i>
-                <span className="text-sm text-text">Fiverr</span>
-                <span className="text-sm text-subtext">Level 1</span>
-              </div>
-            </div>
-          </section>
+            <h2 className="mt-12 text-title font-semibold">{copy.journeyTitle}</h2>
+            <p className="mt-4 text-sm leading-relaxed text-muted">{copy.journey}</p>
+          </div>
 
-          <div className="lg:col-span-7 grid gap-6">
-            <section className="card !p-6">
-              <PageSubHeading icon="fad fa-code" title={t('About.whatIDo.title')} />
-              <ul className="mt-4 space-y-3">
-                {toStringArray(whatIDoItems).map((item, index) => (
-                  <BulletItem key={index} icon="fa-code">
-                    {item}
-                  </BulletItem>
-                ))}
-              </ul>
-            </section>
+          <aside className="lg:sticky lg:top-28 lg:self-start">
+            <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line">
+              {STATS.map((stat) => (
+                <div key={stat.label} className="bg-surface p-5">
+                  <dt className="text-2xl font-semibold text-ink">{stat.value}</dt>
+                  <dd className="mt-1 text-xs leading-snug text-faint">{stat.label}</dd>
+                </div>
+              ))}
+            </dl>
+            <Link href="/contact" className="btn-primary mt-6 w-full">
+              Start a project
+            </Link>
+          </aside>
+        </div>
+      </section>
 
-            <section className="card !p-6">
-              <PageSubHeading icon="fad fa-trophy" title={t('About.achievements.title')} />
-              <ul className="mt-4 space-y-3">
-                {toStringArray(achievementsItems).map((item, index) => (
-                  <BulletItem key={index} icon="fa-trophy-star">
-                    {item}
-                  </BulletItem>
-                ))}
-              </ul>
-            </section>
-
-            <section className="card !p-6">
-              <PageSubHeading icon="fad fa-lightbulb" title={t('About.philosophy.title')} />
-              <p className="mt-2 text-text text-sm leading-relaxed">{t('About.philosophy.intro')}</p>
-              <ul className="mt-4 space-y-3">
-                {toStringArray(philosophyItems).map((item, index) => (
-                  <BulletItem key={index} icon="fa-lightbulb-on">
-                    {item}
-                  </BulletItem>
-                ))}
-              </ul>
-            </section>
+      <section className="border-t border-line bg-surface py-16">
+        <div className="shell grid gap-12 lg:grid-cols-3">
+          <div>
+            <h2 className="text-title font-semibold">{copy.whatIDoTitle}</h2>
+            <List items={copy.whatIDo} />
+          </div>
+          <div>
+            <h2 className="text-title font-semibold">{copy.achievementsTitle}</h2>
+            <List items={copy.achievements} />
+          </div>
+          <div>
+            <h2 className="text-title font-semibold">{copy.philosophyTitle}</h2>
+            <List items={copy.philosophy} />
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 };

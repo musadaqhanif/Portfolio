@@ -1,41 +1,36 @@
-import { useState, useEffect } from 'react';
-import { BiCalendar } from 'react-icons/bi';
+import { useEffect, useState } from 'react';
 
-const WorkDuration = ({ startMonth, endMonth, locale }) => {
-    const [duration, setDuration] = useState(null);
+/**
+ * Renders how long a role lasted. Computed on the client only: the value
+ * depends on today's date for ongoing roles, so rendering it on the server
+ * would produce a hydration mismatch the moment the two disagree.
+ */
+const WorkDuration = ({ startMonth, endMonth }) => {
+  const [duration, setDuration] = useState(null);
 
-    useEffect(() => {
-        const calculateDuration = () => {
-            const start = new Date(startMonth);
-            const end = endMonth ? new Date(endMonth) : new Date();
+  useEffect(() => {
+    const start = new Date(startMonth);
+    const end = endMonth ? new Date(endMonth) : new Date();
 
-            let yearDiff = end.getFullYear() - start.getFullYear();
-            let monthDiff = end.getMonth() - start.getMonth();
+    let years = end.getFullYear() - start.getFullYear();
+    let months = end.getMonth() - start.getMonth();
 
-            yearDiff = monthDiff < 0 && yearDiff != 0 ? yearDiff - 1 : yearDiff;
-            monthDiff = monthDiff < 0 ? 12 + monthDiff : monthDiff;
+    if (months < 0) {
+      months += 12;
+      years -= 1;
+    }
 
-            const yearLabel = locale === "en" ? "Year" + (yearDiff > 1 ? 's' : '') : "Tahun";
-            const monthLabel = locale === "en" ? "Month" + (monthDiff > 1 ? 's' : '') : "Bulan";
+    const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
 
-            if (yearDiff === 0 && monthDiff === 0) {
-                setDuration(locale == "en" ? "Less than a Month" : "Kurang dari satu bulan");
-            } else if (yearDiff === 0) {
-                setDuration(`${monthDiff} ${monthLabel}`);
-            } else if (yearDiff === 1 && monthDiff === 0) {
-                setDuration(`${yearDiff} ${yearLabel}`);
-            } else {
-                const formattedDuration = `${yearDiff} ${yearLabel} ${monthDiff} ${monthLabel}`;
-                setDuration(formattedDuration);
-            }
-        };
+    if (years <= 0 && months <= 0) setDuration('Less than a month');
+    else if (years <= 0) setDuration(plural(months, 'month'));
+    else if (months === 0) setDuration(plural(years, 'year'));
+    else setDuration(`${plural(years, 'year')} ${plural(months, 'month')}`);
+  }, [startMonth, endMonth]);
 
-        calculateDuration();
-    }, [startMonth, endMonth, locale]);
+  if (!duration) return null;
 
-    return (
-        <p className='text-sm text-subtext  flex items-center gap-1'><BiCalendar className='text-primary' />{duration}</p>
-    );
+  return <span className="text-xs text-faint">{duration}</span>;
 };
 
 export default WorkDuration;

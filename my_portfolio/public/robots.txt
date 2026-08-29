@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://musadaqhanif.com/
+Host: https://musadaq.live
 
 # Sitemaps
-Sitemap: https://musadaqhanif.com/sitemap.xml
+Sitemap: https://musadaq.live/sitemap.xml

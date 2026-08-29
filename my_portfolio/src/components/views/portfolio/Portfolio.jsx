@@ -1,148 +1,105 @@
-import { useCallback, useEffect, useState } from "react";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
-import { BiRightArrowAlt } from "react-icons/bi";
+import { useMemo, useState } from 'react';
+import Link from 'next/link';
+import NextImage from 'next/image';
+import { motion } from 'framer-motion';
 
-import { PORTFOLIO_CATEGORIES, PORTFOLIO_TYPES } from "@/constants/data/portfolio";
+import { PORTFOLIO_CATEGORIES, PORTFOLIO_TYPES } from '@/constants/data/portfolio';
+import { PAGE_COPY } from '@/constants/copy';
 
-import Pin from "@/assets/pin.svg";
-import Image from "@/components/elements/Image";
+import PortfolioCategory from './PortfolioCategory';
 
-import PortfolioCategory from "./PortfolioCategory";
+const Thumb = ({ project, eager }) => {
+  const cls = 'h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]';
+  if (project.thumbnailType === 'video') {
+    return (
+      <video
+        src={project.thumbnail}
+        className={cls}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        aria-label={project.name}
+      />
+    );
+  }
+  return (
+    <NextImage
+      src={project.thumbnail}
+      alt={project.name}
+      fill
+      priority={eager}
+      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 370px"
+      className={cls}
+    />
+  );
+};
 
-const Portfolio = ({ portfolios, locale }) => {
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [items, setItems] = useState(portfolios);
-  const [noPortfolioMessage, setNoPortfolioMessage] = useState(null);
-  const t = useTranslations("Portfolio");
+const Portfolio = ({ portfolios }) => {
+  const [active, setActive] = useState('all');
 
-  const filterItems = (categoryItem) => {
-    setActiveCategory(categoryItem);
+  const counts = useMemo(() => {
+    const result = { all: portfolios.length };
+    Object.keys(PORTFOLIO_CATEGORIES).forEach((key) => {
+      if (key === 'all') return;
+      result[key] = portfolios.filter((p) => p.category === key).length;
+    });
+    return result;
+  }, [portfolios]);
 
-    if (categoryItem === "all") {
-      setItems(portfolios);
-      setNoPortfolioMessage(null);
-    } else {
-      const updatedItems = portfolios.filter((curElem) => curElem.category === categoryItem);
-
-      if (updatedItems.length === 0) {
-        setNoPortfolioMessage(getNoPortfolioMessage(categoryItem));
-      } else {
-        setItems(updatedItems);
-        setNoPortfolioMessage(null);
-      }
-    }
-  };
-
-  const getNoPortfolioMessage = useCallback((categoryItem) => {
-    const categoryData = PORTFOLIO_CATEGORIES[categoryItem];
-    const categoryLabel = categoryData ? categoryData.label[locale] : categoryItem;
-    return t("noPortfolio", { category: categoryLabel });
-  }, [locale, t]);
-
-  useEffect(() => {
-    // Re-run filter when the language (locale) changes
-    if (activeCategory !== "all") {
-      const updatedItems = portfolios.filter((curElem) => curElem.category === activeCategory);
-
-      if (updatedItems.length === 0) {
-        setNoPortfolioMessage(getNoPortfolioMessage(activeCategory));
-      } else {
-        setItems(updatedItems);
-        setNoPortfolioMessage(null);
-      }
-    }
-  }, [locale, activeCategory, portfolios, t, getNoPortfolioMessage]);
-
-  const iconByCategory = {
-    'web-development': "fad fa-globe",
-    'desktop-application': "fad fa-desktop",
-    'ml-ai': "fad fa-brain",
-    'chrome-extensions': "fad fa-puzzle-piece",
-    'web-design': "fad fa-pen-nib",
-  };
+  const items = useMemo(
+    () => (active === 'all' ? portfolios : portfolios.filter((p) => p.category === active)),
+    [active, portfolios]
+  );
 
   return (
-    <>
-      <PortfolioCategory filter={filterItems} active={activeCategory} />
+    <div className="shell py-14">
+      <PortfolioCategory filter={setActive} active={active} counts={counts} />
 
-      {noPortfolioMessage ? (
-        <p className="text-subtext">
-          <i className="fad fa-exclamation-circle mr-2"></i>
-          {noPortfolioMessage}
-        </p>
+      {items.length === 0 ? (
+        <p className="mt-12 text-sm text-muted">{PAGE_COPY.portfolio.noPortfolio}</p>
       ) : (
-        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-5">
-          {items.map((elem, index) => {
-            const { id, thumbnail, thumbnailType, name, category, isFeatured, excerpt, slug, type } = elem;
-            // This prevents runtime crashes if a portfolio item has an unknown type.
-            const portfolioType = PORTFOLIO_TYPES[type] || PORTFOLIO_TYPES.personal;
+        <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {items.map((project, index) => {
+            const type = PORTFOLIO_TYPES[project.type] || PORTFOLIO_TYPES.personal;
             return (
               <motion.li
-                key={id || index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
+                key={project.slug}
+                layout
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: Math.min(index, 6) * 0.04 }}
               >
-                <Link
-                  data-umami-event={`Click Portfolio - ${name}`}
-                  href={`portfolio/${slug}`}
-                >
-                  <div className="group/portfolio relative flex flex-col overflow-hidden rounded-xl h-full lg:hover:scale-[102%] transition-3s">
-                    <div className="work__thumbnail aspect-thumbnail">
-                      <div className="absolute flex items-center top-2 right-2 gap-2 z-[1]">
-                        {isFeatured && (
-                          <span className="flex items-center gap-1 px-2 py-1 bg-orange-300 text-black rounded-md z-10">
-                            <Image src={Pin} alt="pin" />
-                            {locale === "en" ? "Featured" : "Unggulan"}
-                          </span>
-                        )}
-                        <div className="px-2 py-1 bg-orange-300 text-black rounded-md z-10">
-                          <i className={iconByCategory[category] || "fad fa-circle-question"}></i>
-                        </div>
-                      </div>
-                      <div className="relative">
-                        {thumbnailType === 'video' ? (
-                          <video
-                            src={thumbnail}
-                            className="aspect-thumbnail object-cover w-full h-full"
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            preload="metadata"
-                          />
-                        ) : (
-                          <Image
-                            src={thumbnail}
-                            alt={slug}
-                            width={999}
-                            height={999}
-                            className="aspect-thumbnail object-cover"
-                            priority={index === 0}
-                            loading={index === 0 ? undefined : "lazy"}
-                          />
-                        )}
-                        <div className="flex gap-1 absolute top-0 left-0 w-full h-full bg-black opacity-0 transition-opacity duration-300 justify-center items-center text-white group-hover/portfolio:opacity-80">
-                          {t("seePortfolio")}<BiRightArrowAlt />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-5 flex flex-col h-full gap-1 bg-container border border-stroke">
-                      <div>
-                        <p className="text-subtext text-xs flex gap-1 items-center mb-1">
-                          <span className="text-primary">{portfolioType.icon}</span>
-                          {portfolioType[locale] || portfolioType.en}
-                        </p>
-                        <h2 className="font-semibold group-hover/portfolio:text-primary">
-                          {name}
-                        </h2>
-                      </div>
-                      <p className="text-sm overflow-hidden whitespace-normal overflow-ellipsis line-clamp-2 text-subtext">
-                        {excerpt}
-                      </p>
-                    </div>
+                {/* Leading slash matters: a relative href resolves against the
+                    current path and would produce /portfolio/portfolio/<slug>. */}
+                <Link href={`/portfolio/${project.slug}`} className="group card card-hover flex h-full flex-col overflow-hidden">
+                  <div className="relative aspect-[16/10] overflow-hidden bg-elevated">
+                    <Thumb project={project} eager={index === 0} />
+                    {project.isFeatured && (
+                      <span className="absolute left-3 top-3 rounded-full bg-bg/90 px-2.5 py-1 text-[0.65rem] font-medium uppercase tracking-wider text-accent backdrop-blur">
+                        Featured
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="flex flex-1 flex-col p-6">
+                    <p className="flex items-center gap-1.5 text-xs text-faint">
+                      <span className="text-accent">{type.icon}</span>
+                      {type.en}
+                    </p>
+                    <h2 className="mt-2 font-semibold text-ink transition-colors group-hover:text-accent">
+                      {project.name}
+                    </h2>
+                    <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-muted">
+                      {project.excerpt}
+                    </p>
+                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-accent">
+                      {PAGE_COPY.portfolio.seePortfolio}
+                      <span aria-hidden className="transition-transform duration-300 ease-out group-hover:translate-x-1">
+                        &rarr;
+                      </span>
+                    </span>
                   </div>
                 </Link>
               </motion.li>
@@ -150,7 +107,7 @@ const Portfolio = ({ portfolios, locale }) => {
           })}
         </ul>
       )}
-    </>
+    </div>
   );
 };
 

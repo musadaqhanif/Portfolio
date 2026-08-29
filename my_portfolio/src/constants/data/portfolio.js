@@ -98,6 +98,16 @@ export const PORTFOLIO_TYPES = {
         en: "SaaS Platform",
         id: "Platform SaaS"
     },
+    'business-website': {
+        icon: <BiBuilding/>,
+        en: "Business Website",
+        id: "Situs Bisnis"
+    },
+    'enterprise-migration': {
+        icon: <BiCube/>,
+        en: "Enterprise Migration",
+        id: "Migrasi Enterprise"
+    },
     'backend-security': {
         icon: <BiBriefcase/>,
         en: "Backend Security Project",

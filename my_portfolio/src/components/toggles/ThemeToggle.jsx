@@ -1,60 +1,45 @@
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
 
-const ThemeToggle = ({t}) => {
-    const { theme, setTheme } = useTheme();
-    const [mounted, setMounted] = useState(false);
+const ThemeToggle = () => {
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            setMounted(true);
-        }, 50);
-        return () => clearTimeout(timeout);
-    }, []);
+  // Theme is only known on the client; render a neutral placeholder until then
+  // so the server and client markup match and hydration stays quiet.
+  useEffect(() => setMounted(true), []);
 
-    const toggleTheme = () => {
-        if (!mounted) return;
-        const newTheme = theme === "light" ? "dark" : "light";
-        setTheme(newTheme);
-    };
+  const isDark = resolvedTheme === 'dark';
 
-    const currentTheme = mounted ? theme : null; // null untuk initial load safe
-
-    return (
-        <div className="w-full p-1 bg-background rounded-2xl border border-stroke">
-            <label className="relative flex h-10 items-center cursor-pointer">
-                <input
-                    data-umami-event={`Switch to ${currentTheme === "dark" ? "Light" : "Dark"} Mode`}
-                    type="checkbox"
-                    className="sr-only peer"
-                    checked={currentTheme === "dark"}
-                    onChange={toggleTheme}
-                />
-                <div className="slider bg-background peer-checked:bg-background grid grid-cols-2 rounded-2xl justify-between items-center w-full h-full relative">
-                    <span
-                        className={`absolute h-full border border-stroke rounded-xl bg-container transition-all duration-300 ease-in-out ${
-                            currentTheme === "dark" ? "translate-x-full w-1/2" : "translate-x-0 w-1/2"
-                        } ${mounted ? "opacity-100" : "opacity-0"}`}
-                        style={{ zIndex: 1 }}
-                    />
-                    <p
-                        className={`z-10 p-3 justify-center leading-4 flex items-center gap-2 text-slate-500 transition-all duration-300 ${
-                            currentTheme === "light" ? "!text-slate-800" : ""
-                        } ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"}`}
-                    >
-                        <i className="fad fa-sun-bright"></i>{t("light")}
-                    </p>
-                    <p
-                        className={`z-10 p-3 justify-center leading-4 flex items-center gap-2 text-slate-500 transition-all duration-300 ${
-                            currentTheme === "dark" ? "!text-slate-300" : ""
-                        } ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"}`}
-                    >
-                        <i className="fad fa-moon"></i>{t("dark")}
-                    </p>
-                </div>
-            </label>
-        </div>
-    );
+  return (
+    <button
+      type="button"
+      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
+      className="grid h-10 w-10 place-items-center rounded-full border border-line text-muted transition-colors duration-300 hover:border-accent hover:text-accent"
+    >
+      {mounted && (
+        <svg
+          viewBox="0 0 24 24"
+          className="h-[18px] w-[18px]"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          aria-hidden="true"
+        >
+          {isDark ? (
+            <>
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+            </>
+          ) : (
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          )}
+        </svg>
+      )}
+    </button>
+  );
 };
 
 export default ThemeToggle;

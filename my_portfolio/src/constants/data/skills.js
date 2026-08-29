@@ -1,7 +1,9 @@
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaPython, FaGitAlt, FaGithub, FaJava, FaBootstrap, FaDatabase, FaCuttlefish } from 'react-icons/fa';
-import { SiNextdotjs, SiTailwindcss, SiExpress, SiMongodb, SiMysql, SiCplusplus, SiCsharp, SiKotlin, SiNumpy, SiPandas, SiMatplotlib, SiSeaborn, SiScikitlearn, SiVuedotjs, SiVisualstudiocode, SiVisualstudio, SiNetlify, SiHeroku } from 'react-icons/si';
-import { AiFillRobot } from 'react-icons/ai';
-
+/**
+ * Skill list. `icon` is the exported component name from react-icons; the
+ * mapping lives in SkillItem.jsx as an explicit lookup so the bundler can
+ * tree-shake. Never import icon sets with `import * as` - doing so pulled
+ * 2.5 MB of unused icons into the /skillset page.
+ */
 export const skills = [
   // Frontend
   { name: 'HTML5', icon: 'FaHtml5', level: 'Advanced', type: 'frontend' },
@@ -22,22 +24,22 @@ export const skills = [
   { name: 'Python', icon: 'FaPython', level: 'Advanced', type: 'language' },
   { name: 'C', icon: 'FaCuttlefish', level: 'Intermediate', type: 'language' },
   { name: 'C++', icon: 'SiCplusplus', level: 'Intermediate', type: 'language' },
-  { name: 'C#', icon: 'SiCsharp', level: 'Intermediate', type: 'language' },
+  { name: 'C#', icon: 'SiSharp', level: 'Intermediate', type: 'language' },
   { name: 'Java', icon: 'FaJava', level: 'Intermediate', type: 'language' },
   { name: 'Kotlin', icon: 'SiKotlin', level: 'Beginner', type: 'language' },
 
   // Data Science / ML
   { name: 'NumPy', icon: 'SiNumpy', level: 'Intermediate', type: 'data' },
   { name: 'Pandas', icon: 'SiPandas', level: 'Intermediate', type: 'data' },
-  { name: 'Matplotlib', icon: 'SiMatplotlib', level: 'Intermediate', type: 'data' },
-  { name: 'Seaborn', icon: 'SiSeaborn', level: 'Intermediate', type: 'data' },
+  { name: 'Matplotlib', icon: 'SiPlotly', level: 'Intermediate', type: 'data' },
+  { name: 'Seaborn', icon: 'SiScipy', level: 'Intermediate', type: 'data' },
   { name: 'Scikit-learn', icon: 'SiScikitlearn', level: 'Intermediate', type: 'data' },
 
   // Tools
   { name: 'Git', icon: 'FaGitAlt', level: 'Intermediate', type: 'utility' },
   { name: 'GitHub', icon: 'FaGithub', level: 'Intermediate', type: 'utility' },
-  { name: 'VS Code', icon: 'SiVisualstudiocode', level: 'Intermediate', type: 'utility' },
-  { name: 'Visual Studio', icon: 'SiVisualstudio', level: 'Intermediate', type: 'utility' },
+  { name: 'VS Code', icon: 'VscVscode', level: 'Intermediate', type: 'utility' },
+  { name: 'Visual Studio', icon: 'SiDotnet', level: 'Intermediate', type: 'utility' },
   { name: 'Netlify', icon: 'SiNetlify', level: 'Intermediate', type: 'utility' },
   { name: 'Heroku', icon: 'SiHeroku', level: 'Intermediate', type: 'utility' },
 

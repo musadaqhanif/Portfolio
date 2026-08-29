@@ -1,79 +1,70 @@
-import Link from "next/link";
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { FAQPageJsonLd } from "next-seo";
-import { useTranslations } from "next-intl";
+import { useState } from 'react';
+import Link from 'next/link';
 
-import { FAQ_DATA } from "@/constants/data/faq";
-import PageSubHeading from "@/components/common/PageSubHeading";
+import { FAQ_DATA } from '@/constants/data/faq';
+import { PAGE_COPY } from '@/constants/copy';
 
-const FAQSection = ({ locale }) => {
-    const t = useTranslations("Services.FAQ");
-    const faqData = FAQ_DATA[locale];
-    const [expandedIndex, setExpandedIndex] = useState(0);
+const FAQSection = () => {
+  const [open, setOpen] = useState(0);
+  const faqs = FAQ_DATA.en || [];
+  const copy = PAGE_COPY.services;
 
-    const toggleExpand = (index) => {
-        setExpandedIndex(expandedIndex === index ? -1 : index);
-    };
+  if (!faqs.length) return null;
 
-    return (
-        <>
-            <FAQPageJsonLd
-                mainEntity={faqData.map((item) => ({
-                    questionName: item.question,
-                    acceptedAnswerText: item.answer
-                }))}
-            />
-            <div className="">
+  return (
+    <section className="border-t border-line bg-surface py-16">
+      <div className="shell grid gap-12 lg:grid-cols-[20rem_minmax(0,1fr)] lg:gap-16">
+        <div className="lg:sticky lg:top-28 lg:self-start">
+          <span className="eyebrow">FAQ</span>
+          <h2 className="mt-4 text-title font-semibold">{copy.faqHeading}</h2>
+          <p className="mt-3 text-sm leading-relaxed text-muted">{copy.faqDescription}</p>
+          <p className="mt-6 text-sm text-muted">
+            {copy.contactText}{' '}
+            <Link href="/contact" className="font-medium text-accent hover:underline">
+              {copy.contactLink}
+            </Link>
+          </p>
+        </div>
 
-                <PageSubHeading title={t("faqHeading")} description={t("faqDescription")} icon="fa-sm fad fa-circle-question text-text" />
-                <div className="bg-container p-4 sm:p-5 rounded-xl border border-stroke ">
-                    {faqData.map((item, index) => (
-                        <div
-                            key={index}
-                            className="overflow-hidden"
-                        >
-                            <div
-                                className="flex items-center justify-between gap-4  cursor-pointer"
-                                onClick={() => toggleExpand(index)}
-                            >
-                                <h3 className="text-base font-medium">
-                                    {item.question}</h3>
-                                <i
-                                    className={`text-subtext transition-transform duration-300 fal fa-plus mr-2 ${expandedIndex === index ? 'rotate-45' : 'rotate-0'}`}
-                                />
-
-                            </div>
-
-                            <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={
-                                    expandedIndex === index
-                                        ? { height: "auto", opacity: 1 }
-                                        : { height: 0, opacity: 0 }
-                                }
-                                transition={{ duration: 0.3 }}
-                                className="overflow-hidden"
-                            >
-                                <div className="pt-1 text-sm bg-container text-subtext">{item.answer}</div>
-                            </motion.div>
-                            {
-                                index !== faqData.length - 1 &&
-                                <hr className="border-stroke my-3" />
-                            }
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            <div className="flex justify-start items-center gap-2">
-                <p>{t("contactText")}</p>
-                <Link className="font-medium text-primary" href="/contact" aria-label="Go to Contact Page">
-                    {t("contactLink")}
-                </Link>
-            </div>
-        </>
-    );
+        <dl className="divide-y divide-line border-y border-line">
+          {faqs.map((faq, index) => {
+            const isOpen = open === index;
+            return (
+              <div key={faq.question}>
+                <dt>
+                  <button
+                    type="button"
+                    onClick={() => setOpen(isOpen ? -1 : index)}
+                    aria-expanded={isOpen}
+                    className="flex w-full items-start justify-between gap-6 py-5 text-left"
+                  >
+                    <span className={`text-base font-medium transition-colors ${isOpen ? 'text-accent' : 'text-ink'}`}>
+                      {faq.question}
+                    </span>
+                    <span
+                      aria-hidden
+                      className={`mt-1 shrink-0 text-lg leading-none text-faint transition-transform duration-300 ease-out ${isOpen ? 'rotate-45' : ''}`}
+                    >
+                      +
+                    </span>
+                  </button>
+                </dt>
+                <dd
+                  className={`grid overflow-hidden transition-all duration-300 ease-out ${
+                    isOpen ? 'grid-rows-[1fr] pb-6' : 'grid-rows-[0fr]'
+                  }`}
+                >
+                  <p className="min-h-0 max-w-prose text-sm leading-relaxed text-muted">
+                    {faq.answer}
+                  </p>
+                </dd>
+              </div>
+            );
+          })}
+        </dl>
+      </div>
+    </section>
+  );
 };
 
 export default FAQSection;

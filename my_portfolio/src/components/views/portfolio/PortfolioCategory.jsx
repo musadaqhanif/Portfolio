@@ -1,27 +1,33 @@
 import { PORTFOLIO_CATEGORIES } from '@/constants/data/portfolio';
-import { useRouter } from 'next/router';
 
-const PortfolioCategory = ({ filter, active }) => {
-    const { locale } = useRouter();
-    return (
-        <nav>
-            <ul className="flex gap-3 sm:gap-4 mb-6 justify-center sm:justify-start">
-                {Object.entries(PORTFOLIO_CATEGORIES).map(([key, category], index) => (
-                    <li key={index} className="category">
-                        <button
-                            data-umami-event={`Click Portfolio Category - ${category.label[locale]}`}
-                            onClick={() => filter(category.slug)}
-                            title={category.label[locale]}
-                            className={`text-lg sm:text-base badge !px-4 !py-3 sm:!px-3 sm:!py-2 ${active === category.slug ? '!text-primary' : ''}`}
-                        >
-                            <i className={category.classIcon}></i>
-                            <p className='hidden sm:block'>{category.label[locale]}</p>
-                        </button>
-                    </li>
-                ))}
-            </ul>
-        </nav>
-    );
-};
+const PortfolioCategory = ({ filter, active, counts }) => (
+  <nav aria-label="Filter projects by category">
+    <ul className="flex flex-wrap gap-2">
+      {Object.entries(PORTFOLIO_CATEGORIES).map(([key, category]) => {
+        const isActive = active === category.slug;
+        const count = counts?.[category.slug] ?? 0;
+        return (
+          <li key={key}>
+            <button
+              type="button"
+              onClick={() => filter(category.slug)}
+              aria-pressed={isActive}
+              className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm transition-all duration-300 ease-out ${
+                isActive
+                  ? 'border-accent bg-accent/10 text-accent'
+                  : 'border-line bg-surface text-muted hover:border-accent/40 hover:text-ink'
+              }`}
+            >
+              {category.label.en}
+              <span className={`text-xs ${isActive ? 'text-accent' : 'text-faint'}`}>
+                {count}
+              </span>
+            </button>
+          </li>
+        );
+      })}
+    </ul>
+  </nav>
+);
 
 export default PortfolioCategory;

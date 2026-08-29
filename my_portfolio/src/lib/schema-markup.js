@@ -1,55 +1,80 @@
+import { CONTACT_EMAIL, SITE_NAME, SITE_URL, SOCIAL_LINKS, url } from '@/constants/site';
+
+/**
+ * Structured data for search engines.
+ *
+ * Every URL is derived from SITE_URL. Previously these were hard-coded to the
+ * template author's domain, which told Google this site's canonical identity
+ * belonged to someone else.
+ */
+const PAGES = [
+  { name: 'Home', path: '/' },
+  { name: 'Work', path: '/portfolio' },
+  { name: 'Services', path: '/services' },
+  { name: 'Reviews', path: '/reviews' },
+  { name: 'About', path: '/about' },
+  { name: 'Experience', path: '/experience' },
+  { name: 'Skillset', path: '/skillset' },
+  { name: 'Blog', path: '/blog' },
+  { name: 'Contact', path: '/contact' },
+];
+
 export const schemaMarkup = {
-    "@context": "https://schema.org",
-    "@graph": [
-        {
-            "@type": "Person",
-            "name": "Musadaq Hanif",
-            "url": "https://dwiwijaya.com/",
-            "jobTitle": "Fullstack Developer",
-            "worksFor": { "@type": "Organization", "name": "Freelancer" },
-            "sameAs": [
-                "https://www.linkedin.com/in/musadaq-hanif/",
-                "https://github.com/musadaqhanif",
-                "https://www.instagram.com/_musadaqhanif_/"
-            ]
-        },
-        {
-            "@type": "WebSite",
-            "name": "Musadaq Hanif - Personal Website",
-            "url": "https://dwiwijaya.com/",
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://dwiwijaya.com/?s={search_term_string}",
-                "query-input": "required name=search_term_string"
-            }
-        },
-        {
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://dwiwijaya.com/" },
-                { "@type": "ListItem", "position": 2, "name": "About", "item": "https://dwiwijaya.com/about" },
-                { "@type": "ListItem", "position": 3, "name": "Skillset", "item": "https://dwiwijaya.com/skillset" },
-                { "@type": "ListItem", "position": 4, "name": "Experience", "item": "https://dwiwijaya.com/experience" },
-                { "@type": "ListItem", "position": 5, "name": "Services", "item": "https://dwiwijaya.com/services" },
-                { "@type": "ListItem", "position": 6, "name": "Portfolio", "item": "https://dwiwijaya.com/portfolio" },
-                { "@type": "ListItem", "position": 7, "name": "Reviews", "item": "https://dwiwijaya.com/reviews" },
-                { "@type": "ListItem", "position": 8, "name": "Blog", "item": "https://dwiwijaya.com/blog" },
-                { "@type": "ListItem", "position": 9, "name": "Contact", "item": "https://dwiwijaya.com/contact" }
-            ]
-        },
-        {
-            "@type": "ItemList",
-            "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Home", "url": "https://dwiwijaya.com/" },
-                { "@type": "ListItem", "position": 2, "name": "About", "url": "https://dwiwijaya.com/about" },
-                { "@type": "ListItem", "position": 3, "name": "Skillset", "url": "https://dwiwijaya.com/skillset" },
-                { "@type": "ListItem", "position": 4, "name": "Experience", "url": "https://dwiwijaya.com/experience" },
-                { "@type": "ListItem", "position": 5, "name": "Services", "url": "https://dwiwijaya.com/services" },
-                { "@type": "ListItem", "position": 6, "name": "Portfolio", "url": "https://dwiwijaya.com/portfolio" },
-                { "@type": "ListItem", "position": 7, "name": "Reviews", "url": "https://dwiwijaya.com/reviews" },
-                { "@type": "ListItem", "position": 8, "name": "Blog", "url": "https://dwiwijaya.com/blog" },
-                { "@type": "ListItem", "position": 9, "name": "Contact", "url": "https://dwiwijaya.com/contact" }
-            ]
-        },
-    ]
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': `${SITE_URL}/#person`,
+      name: SITE_NAME,
+      url: url('/'),
+      email: `mailto:${CONTACT_EMAIL}`,
+      jobTitle: 'Software Engineer & Full-Stack Developer',
+      description:
+        'Full-stack engineer building production SaaS platforms, web applications, desktop tools and browser extensions for founders and small teams.',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Lahore',
+        addressRegion: 'Punjab',
+        addressCountry: 'PK',
+      },
+      knowsAbout: [
+        'Next.js', 'React', 'Node.js', 'TypeScript', 'PostgreSQL',
+        'MongoDB', 'SaaS architecture', 'Machine Learning',
+      ],
+      sameAs: [SOCIAL_LINKS.linkedin, SOCIAL_LINKS.github, SOCIAL_LINKS.instagram],
+    },
+    {
+      '@type': 'ProfessionalService',
+      '@id': `${SITE_URL}/#service`,
+      name: `${SITE_NAME} - Full-Stack Development`,
+      url: url('/services'),
+      provider: { '@id': `${SITE_URL}/#person` },
+      areaServed: 'Worldwide',
+      serviceType: [
+        'Web Application Development',
+        'SaaS Product Development',
+        'Web Design',
+        'Machine Learning Integration',
+        'Browser Extension Development',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      name: `${SITE_NAME} - Software Engineer`,
+      url: url('/'),
+      publisher: { '@id': `${SITE_URL}/#person` },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${SITE_URL}/#breadcrumbs`,
+      itemListElement: PAGES.map((page, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: page.name,
+        item: url(page.path),
+      })),
+    },
+  ],
 };

@@ -1,112 +1,134 @@
+import { useRef, useState } from 'react';
 import { BiLoaderAlt, BiMailSend } from 'react-icons/bi';
-import { useTranslations } from 'next-intl';
-import { useRef, useState } from 'react'
 
 import useEmailService from '@/services/EmailService';
 import { Socials } from '@/constants/data/socials';
+import { PAGE_COPY } from '@/constants/copy';
 
 const Contact = () => {
-    const t = useTranslations();
-    const formRef = useRef();
-    const { sendEmail, loading } = useEmailService();
-    const [isSuccess, setIsSuccess] = useState(false);
+  const copy = PAGE_COPY.contact;
+  const formRef = useRef();
+  const { sendEmail, loading } = useEmailService();
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsSuccess(false);
-        const result = await sendEmail(formRef.current);
-        if (result?.success) {
-            setIsSuccess(true);
-            setTimeout(() => setIsSuccess(false), 4000);
-        }
-    };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setIsSuccess(false);
 
-    return (
-        <>
-            <section className="contact__container">
-                <div className="mb-8">
-                    <p className="mb-4 font-semibold">
-                        <i className="fa-sm fad fa-user-group mr-2"></i>
-                        {t('Contact.findSocial')}
-                    </p>
-                    <ul className="flex md:flex-row gap-2 justify-center">
-                        {Socials.map((social, index) => (
-                            <li key={index} className='flex w-full'>
-                                <button onClick={() => window.open(social.link, '_blank')} data-umami-event={social.eventName} title={social.label} className='w-full flex gap-2 justify-center items-center p-3 text-white rounded-md' style={{ backgroundColor: social.background }}>
-                                    {social.reactIcon}
-                                    <div className="hidden md:block">{social.label}</div>
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
+    // Honeypot: a real person never sees or fills this field, so anything in it
+    // is a bot. Fail silently rather than telling the bot it was detected.
+    if (formRef.current?.company?.value) return;
 
-                </div>
-                <div className="relative">
-                    <p className="mb-5 font-semibold">
-                        <i className="fa-sm fad fa-envelope-open-text mr-2"></i>
-                        {t('Contact.orsendMsg')}
-                    </p>
-                    <form
-                        ref={formRef}
-                        onSubmit={handleSubmit}
-                        autoComplete='off'
-                        className="contact__form">
-                        {isSuccess && (
-                            <div className="mb-4 rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm text-text">
-                                <i className="fa-sm fad fa-circle-check mr-2 text-green-500"></i>
-                                Message sent successfully. I’ll reply soon.
-                            </div>
-                        )}
-                        <div className="flex-col flex md:flex-row md:gap-4 justify-evenly"
-                        >
-                            <div className="form-control">
-                                <div className="form-label">{t('Contact.name')}</div>
-                                <input
-                                    type="text"
-                                    autoComplete={"off"}
-                                    className="form-input"
-                                    placeholder={t('Contact.namePlaceholder')}
-                                    name="name"
-                                    required={true}
-                                />
-                            </div>
-                            <div className="form-control">
-                                <div className="form-label">{t('Contact.mail')}</div>
-                                <input
-                                    type="email"
-                                    autoComplete={"off"}
-                                    className="form-input"
-                                    placeholder={t('Contact.mailPlaceholder')}
-                                    name="email"
-                                    required={true}
-                                />
-                            </div>
-                        </div>
-                        <div className="form-control !h-40">
-                            <div className="form-label">{t('Contact.projectDesc')}</div>
-                            <textarea
-                                name="message"
-                                autoComplete={"off"}
-                                cols="30"
-                                rows="10"
-                                required={true}
-                                placeholder={t('Contact.descPlaceholder')}
-                                className="form-input resize-none "
-                            ></textarea>
-                        </div>
-                        <button data-data-umami-event='Send Contact Message' disabled={loading} className={`${loading ? 'cursor-not-allowed' : ''} btn !w-full md:!w-fit text-center justify-center`} >
-                            {loading ? (
-                                <BiLoaderAlt className='animate-spin' />
-                            ) : (
-                                <BiMailSend />
-                            )}{" "}
-                            {loading ? "Sending..." : t('Contact.sendMsg')}
-                        </button>
-                    </form>
-                </div>
-            </section>
-        </>
-    )
-}
+    const result = await sendEmail(formRef.current);
+    if (result?.success) {
+      setIsSuccess(true);
+      formRef.current.reset();
+      setTimeout(() => setIsSuccess(false), 6000);
+    }
+  };
 
-export default Contact
+  return (
+    <section className="shell py-14">
+      <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-16">
+        <div>
+          <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-ink">
+            {copy.orsendMsg}
+          </h2>
+
+          <form ref={formRef} onSubmit={handleSubmit} autoComplete="off" className="mt-7">
+            {isSuccess && (
+              <p
+                role="status"
+                className="mb-6 rounded-xl border border-accent/30 bg-accent/10 px-4 py-3 text-sm text-ink"
+              >
+                Message sent. I will get back to you shortly.
+              </p>
+            )}
+
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label htmlFor="name" className="field-label">{copy.name}</label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  autoComplete="name"
+                  placeholder={copy.namePlaceholder}
+                  className="field"
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="field-label">{copy.mail}</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  placeholder={copy.mailPlaceholder}
+                  className="field"
+                />
+              </div>
+            </div>
+
+            <div className="mt-5">
+              <label htmlFor="message" className="field-label">{copy.projectDesc}</label>
+              <textarea
+                id="message"
+                name="message"
+                rows={7}
+                required
+                placeholder={copy.descPlaceholder}
+                className="field resize-none"
+              />
+            </div>
+
+            {/* Honeypot - hidden from people and from assistive technology. */}
+            <div aria-hidden className="hidden">
+              <label htmlFor="company">Company</label>
+              <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
+            </div>
+
+            <button type="submit" disabled={loading} className="btn-primary mt-7 !px-6 !py-3.5 disabled:cursor-not-allowed disabled:opacity-60">
+              {loading ? <BiLoaderAlt className="animate-spin" aria-hidden /> : <BiMailSend aria-hidden />}
+              {loading ? 'Sending...' : copy.sendMsg}
+            </button>
+          </form>
+        </div>
+
+        <aside>
+          <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-ink">
+            {copy.findSocial}
+          </h2>
+          <ul className="mt-7 space-y-2.5">
+            {Socials.map((social) => (
+              <li key={social.label}>
+                <a
+                  href={social.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 rounded-xl border border-line bg-surface px-4 py-3 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-accent/40"
+                >
+                  <span
+                    className="grid h-8 w-8 shrink-0 place-items-center rounded-lg text-white"
+                    style={{ backgroundColor: social.background }}
+                    aria-hidden
+                  >
+                    {social.reactIcon}
+                  </span>
+                  <span className="flex-1 text-sm text-ink">{social.label}</span>
+                  <span aria-hidden className="text-faint transition-transform duration-300 group-hover:translate-x-0.5">
+                    &rarr;
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      </div>
+    </section>
+  );
+};
+
+export default Contact;

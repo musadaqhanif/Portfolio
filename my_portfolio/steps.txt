@@ -1,8 +1,0 @@
-## Steps (chronological)
-
-- 2026-01-24: Updated the homepage WhatsApp button to open a direct chat to `+923076297161` with a prefilled message via `wa.me` (`src/constants/data/socials.js`).
-- 2026-01-24: Added a highlighted Fiverr badge (Level 1 Seller, 5★ rating, 99% success rate, 19 successful projects) linked to the Fiverr profile (`src/components/elements/fiverr-badge.jsx`).
-- 2026-01-24: Updated the About page content into structured sections with bullet points (About Me, What I Do, Achievements, My Philosophy).
-- 2026-01-24: Expanded Services list (ML/AI, Web Design, Desktop Apps, Browser Extensions, App Development) in `src/constants/data/services.js`.
-- 2026-01-24: Improved EmailJS contact form debugging + env config handling in `src/services/EmailService.js`.
-
