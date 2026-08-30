@@ -7,7 +7,7 @@ import { ServicesData } from '@/constants/data/services';
 const ServicesGrid = () => (
   <section className="section relative overflow-hidden bg-surface">
     <div aria-hidden className="pointer-events-none absolute inset-0">
-      <div className="aurora aurora-drift -left-[8%] bottom-[5%] h-[28rem] w-[28rem] bg-[#7c5cff]/12" />
+      <div className="aurora aurora-drift -left-[8%] bottom-[5%] h-[28rem] w-[28rem] bg-secondary/12" />
     </div>
 
     <div className="shell relative">

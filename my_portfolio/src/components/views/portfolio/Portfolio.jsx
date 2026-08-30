@@ -94,7 +94,7 @@ const Portfolio = ({ portfolios }) => {
                     <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-muted">
                       {project.excerpt}
                     </p>
-                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-accent">
+                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-accent-text">
                       {PAGE_COPY.portfolio.seePortfolio}
                       <span aria-hidden className="transition-transform duration-300 ease-out group-hover:translate-x-1">
                         &rarr;

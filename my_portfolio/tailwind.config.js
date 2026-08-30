@@ -20,6 +20,12 @@ module.exports = {
         faint: 'rgb(var(--faint) / <alpha-value>)',
         accent: 'rgb(var(--accent) / <alpha-value>)',
         'accent-ink': 'rgb(var(--accent-ink) / <alpha-value>)',
+        'accent-hover': 'rgb(var(--accent-hover) / <alpha-value>)',
+        'accent-text': 'rgb(var(--accent-text) / <alpha-value>)',
+        secondary: 'rgb(var(--secondary) / <alpha-value>)',
+        'gradient-one': 'rgb(var(--gradient-one) / <alpha-value>)',
+        'gradient-two': 'rgb(var(--gradient-two) / <alpha-value>)',
+        'line-subtle': 'rgb(var(--border-subtle) / <alpha-value>)',
 
         // Legacy aliases, kept so any markup not yet migrated still resolves.
         background: 'rgb(var(--bg) / <alpha-value>)',
@@ -43,8 +49,9 @@ module.exports = {
       maxWidth: { content: '1180px', prose: '68ch' },
       borderRadius: { xl: '0.875rem', '2xl': '1.25rem', '3xl': '1.75rem' },
       boxShadow: {
-        soft: '0 1px 2px rgb(0 0 0 / 0.04), 0 8px 24px -12px rgb(0 0 0 / 0.12)',
-        lift: '0 2px 4px rgb(0 0 0 / 0.04), 0 24px 48px -24px rgb(0 0 0 / 0.28)',
+        // Resolved from CSS variables so each theme gets its own opacity.
+        soft: 'var(--shadow-soft)',
+        lift: 'var(--shadow-lift)',
       },
       transitionTimingFunction: { out: 'cubic-bezier(0.22, 1, 0.36, 1)' },
       animation: {

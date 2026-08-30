@@ -47,6 +47,10 @@ src/
 
 ### Design system
 
+The palette is adapted from [mhuzefa.dev](https://www.mhuzefa.dev). Note the
+accent deliberately **changes hue between themes** - sky blue `#30a8f2` in
+light, rose `#d9436b` in dark - which is how the source scheme is built.
+
 Colours are defined once in `src/styles/globals.css` as **space-separated RGB
 channels**:
 
@@ -60,8 +64,14 @@ token, add it in both places and keep the channel format — writing a hex value
 there will break every opacity modifier that uses it.
 
 Semantic names: `bg`, `surface`, `elevated`, `line`, `ink`, `muted`, `faint`,
-`accent`. Prefer these over raw Tailwind palette colours so light and dark stay
-in step.
+`accent`, `accent-hover`, `accent-text`, `accent-ink`, `secondary`,
+`gradient-one`, `gradient-two`. Prefer these over raw Tailwind palette colours
+so light and dark stay in step.
+
+Two accent tokens exist on purpose. `accent` is for fills, borders, dots and
+glows. **`accent-text` is for accent used as running text** - the raw accent
+only reaches 2.3:1 on the light background, while `accent-text` reaches 3.1:1
+(light) and 6.1:1 (dark). Do not use `text-accent` for body copy.
 
 ### Adding a project
 

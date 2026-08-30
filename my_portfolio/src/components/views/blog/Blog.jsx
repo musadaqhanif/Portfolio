@@ -34,7 +34,7 @@ const Blog = () => {
                 <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted">
                   {blog.excerpt.en}
                 </p>
-                <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-accent">
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-accent-text">
                   Read post
                   <span aria-hidden className="transition-transform duration-300 ease-out group-hover:translate-x-1">
                     &rarr;

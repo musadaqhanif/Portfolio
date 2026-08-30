@@ -114,7 +114,7 @@ const Reviews = () => {
                   href={review.projectLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-6 inline-flex items-center gap-2 border-t border-line pt-5 text-sm font-medium text-accent"
+                  className="mt-6 inline-flex items-center gap-2 border-t border-line pt-5 text-sm font-medium text-accent-text"
                 >
                   Visit the live project
                   <span aria-hidden>&rarr;</span>

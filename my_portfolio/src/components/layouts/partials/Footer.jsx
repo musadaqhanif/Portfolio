@@ -16,7 +16,7 @@ const Footer = () => (
           </p>
           <a
             href={`mailto:${CONTACT_EMAIL}`}
-            className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-accent transition-transform duration-300 ease-out hover:translate-x-1"
+            className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-accent-text transition-transform duration-300 ease-out hover:translate-x-1"
           >
             {CONTACT_EMAIL}
             <span aria-hidden>&rarr;</span>
@@ -30,7 +30,7 @@ const Footer = () => (
           <ul className="space-y-2.5">
             {MENU_ITEMS.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="text-sm text-muted transition-colors hover:text-accent">
+                <Link href={item.href} className="text-sm text-muted transition-colors hover:text-accent-text">
                   {item.label}
                 </Link>
               </li>
@@ -45,7 +45,7 @@ const Footer = () => (
           <ul className="space-y-2.5">
             {FOOTER_ITEMS.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="text-sm text-muted transition-colors hover:text-accent">
+                <Link href={item.href} className="text-sm text-muted transition-colors hover:text-accent-text">
                   {item.label}
                 </Link>
               </li>

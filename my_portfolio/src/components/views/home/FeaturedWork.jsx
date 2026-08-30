@@ -86,7 +86,7 @@ const Card = ({ project, large = false }) => {
           <p className={`mt-2.5 flex-1 leading-relaxed text-muted ${large ? 'max-w-2xl text-[0.95rem]' : 'line-clamp-3 text-sm'}`}>
             {project.excerpt}
           </p>
-          <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-accent">
+          <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-accent-text">
             Read the case study
             <span aria-hidden className="transition-transform duration-300 ease-out group-hover:translate-x-1">
               &rarr;

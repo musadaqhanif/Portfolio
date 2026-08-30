@@ -12,14 +12,14 @@ const CTA = () => (
           <div aria-hidden className="pointer-events-none absolute inset-0">
             <div className="aurora aurora-drift left-1/2 top-[-40%] h-[30rem] w-[30rem] -translate-x-1/2 bg-accent/20" />
             <div
-              className="aurora aurora-drift left-[15%] bottom-[-40%] h-[22rem] w-[22rem] bg-[#7c5cff]/15"
+              className="aurora aurora-drift left-[15%] bottom-[-40%] h-[22rem] w-[22rem] bg-secondary/15"
               style={{ animationDelay: '-11s' }}
             />
             <div className="absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_at_50%_50%,#000_5%,transparent_65%)]" />
           </div>
 
           <div className="relative">
-            <span className="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.07] px-3.5 py-1.5 text-xs font-medium text-accent backdrop-blur">
+            <span className="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/[0.07] px-3.5 py-1.5 text-xs font-medium text-accent-text backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-[0_0_10px_rgb(var(--accent))]" />
               Taking on new work
             </span>
@@ -35,7 +35,7 @@ const CTA = () => (
             <div className="mt-11 flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/contact"
-                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-accent px-7 py-4 text-sm font-medium text-accent-ink shadow-lift transition-transform duration-300 ease-out hover:-translate-y-0.5"
+                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-accent px-7 py-4 text-sm font-medium text-accent-text-ink shadow-lift transition-transform duration-300 ease-out hover:-translate-y-0.5"
               >
                 <span
                   aria-hidden
@@ -56,7 +56,7 @@ const CTA = () => (
 
             <a
               href={`mailto:${CONTACT_EMAIL}`}
-              className="mt-9 inline-block text-sm text-faint transition-colors hover:text-accent"
+              className="mt-9 inline-block text-sm text-faint transition-colors hover:text-accent-text"
             >
               or email {CONTACT_EMAIL}
             </a>

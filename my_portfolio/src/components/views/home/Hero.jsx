@@ -11,13 +11,16 @@ const Hero = () => (
     {/* Atmosphere: drifting colour fields, then a blueprint grid, both faded
         out toward the bottom so the type never sits on noise. */}
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-      <div className="aurora aurora-drift -left-[12%] -top-[28%] h-[38rem] w-[38rem] bg-accent/25" />
+      {/* Corner washes, mirroring the source scheme: a cool mint-cyan field on
+          the left and a lavender/indigo one on the right, both blurred far past
+          recognition so they read as light rather than as shapes. */}
+      <div className="aurora aurora-drift -left-[18%] -top-[32%] h-[42rem] w-[42rem] bg-gradient-one/30" />
       <div
-        className="aurora aurora-drift left-[52%] -top-[36%] h-[34rem] w-[34rem] bg-[#7c5cff]/20"
+        className="aurora aurora-drift -right-[16%] -top-[26%] h-[40rem] w-[40rem] bg-secondary/25"
         style={{ animationDelay: '-8s' }}
       />
       <div
-        className="aurora aurora-drift left-[18%] top-[36%] h-[26rem] w-[26rem] bg-accent/10"
+        className="aurora aurora-drift left-[26%] top-[42%] h-[28rem] w-[28rem] bg-accent/12"
         style={{ animationDelay: '-15s' }}
       />
       <div className="absolute inset-0 bg-grid [mask-image:radial-gradient(ellipse_at_50%_10%,#000_30%,transparent_75%)]" />
@@ -27,7 +30,7 @@ const Hero = () => (
       <div className="grid items-center gap-14 lg:grid-cols-[1.3fr_1fr] lg:gap-20">
         <div>
           <Reveal>
-            <span className="inline-flex items-center gap-2.5 rounded-full border border-accent/25 bg-accent/[0.07] px-3.5 py-1.5 text-xs font-medium text-accent backdrop-blur">
+            <span className="inline-flex items-center gap-2.5 rounded-full border border-accent/25 bg-accent/[0.07] px-3.5 py-1.5 text-xs font-medium text-accent-text backdrop-blur">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
@@ -71,7 +74,7 @@ const Hero = () => (
             <div className="mt-10 flex flex-wrap items-center gap-3">
               <Link
                 href="/contact"
-                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-accent px-6 py-3.5 text-sm font-medium text-accent-ink shadow-lift transition-transform duration-300 ease-out hover:-translate-y-0.5 active:translate-y-0"
+                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-accent px-6 py-3.5 text-sm font-medium text-accent-text-ink shadow-lift transition-transform duration-300 ease-out hover:-translate-y-0.5 active:translate-y-0"
               >
                 {/* Sheen that sweeps across on hover. */}
                 <span

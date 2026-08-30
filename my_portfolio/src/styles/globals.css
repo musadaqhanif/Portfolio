@@ -8,32 +8,52 @@
    resolves through one of these, so the whole site can be retuned from here.
    ========================================================================== */
 :root {
-  /* Stored as space-separated RGB channels, not hex, so Tailwind can compose
+  /* Palette adapted from mhuzefa.dev.
+     Stored as space-separated RGB channels, not hex, so Tailwind can compose
      them with an alpha value (border-accent/40, bg-accent/10, ...). Any raw CSS
-     below must therefore wrap them: rgb(var(--accent)). */
-  --bg: 251 250 249;
-  --surface: 255 255 255;
-  --surface-2: 244 242 239;
-  --border: 230 226 220;
-  --text: 23 22 26;
-  --muted: 106 102 96;
-  --faint: 150 145 138;
-  --accent: 217 79 43;
-  --accent-ink: 255 255 255;
-  --grid-line: rgba(23, 22, 26, 0.055);
+     below must therefore wrap them: rgb(var(--accent)).
+
+     Note the accent deliberately changes hue between themes - sky blue in
+     light, rose in dark - which is how the source scheme is built. */
+  --bg: 238 241 247;            /* #eef1f7 */
+  --surface: 255 255 255;       /* #ffffff */
+  --surface-2: 248 249 253;     /* #f8f9fd */
+  --border: 209 213 224;        /* #d1d5e0 */
+  --border-subtle: 229 232 239; /* #e5e8ef */
+  --text: 34 35 44;             /* #22232c */
+  --muted: 102 106 121;         /* #666a79 */
+  --faint: 113 117 134;         /* #717586 - text-disabled, ~4.6:1 on --bg */
+  --accent: 48 168 242;         /* #30a8f2 */
+  --accent-hover: 31 143 217;   /* #1f8fd9 */
+  --accent-ink: 255 255 255;    /* text on a filled accent surface */
+  --accent-text: 31 143 217;    /* #1f8fd9 - accent used as readable text */
+  --secondary: 92 115 242;      /* #5c73f2 */
+  --gradient-one: 27 203 242;   /* #1bcbf2 */
+  --gradient-two: 92 115 242;   /* #5c73f2 */
+  --grid-line: rgba(17, 17, 17, 0.05);
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.05), 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lift: 0 10px 30px -8px rgba(0, 0, 0, 0.15);
 }
 
 .dark {
-  --bg: 11 11 13;
-  --surface: 18 18 20;
-  --surface-2: 26 26 30;
-  --border: 38 38 43;
-  --text: 243 241 238;
-  --muted: 156 151 143;
-  --faint: 111 106 99;
-  --accent: 255 122 82;
-  --accent-ink: 23 17 14;
-  --grid-line: rgba(255, 255, 255, 0.05);
+  --bg: 17 17 17;               /* #111111 */
+  --surface: 22 22 22;          /* #161616 */
+  --surface-2: 28 28 28;        /* #1c1c1c */
+  --border: 48 48 51;           /* #303033 */
+  --border-subtle: 34 34 37;    /* #222225 */
+  --text: 233 233 241;          /* #e9e9f1 */
+  --muted: 161 161 175;         /* #a1a1af */
+  --faint: 139 138 145;         /* #8b8a91 */
+  --accent: 217 67 107;         /* #d9436b */
+  --accent-hover: 236 101 137;  /* #ec6589 */
+  --accent-ink: 255 255 255;
+  --accent-text: 236 101 137;   /* #ec6589 - 6.1:1 on the dark ground */
+  --secondary: 206 196 239;     /* #cec4ef */
+  --gradient-one: 179 236 242;  /* #b3ecf2 */
+  --gradient-two: 242 119 164;  /* #f277a4 */
+  --grid-line: rgba(255, 255, 255, 0.06);
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.35);
+  --shadow-lift: 0 10px 30px -8px rgba(0, 0, 0, 0.5);
 }
 
 @layer base {
@@ -363,7 +383,7 @@
 
 /* Text that picks up the accent as a gradient sweep. */
 .text-gradient {
-  background: linear-gradient(120deg, rgb(var(--accent)) 0%, rgb(var(--accent) / 0.75) 55%, rgb(var(--text) / 0.85) 100%);
+  background: linear-gradient(135deg, rgb(var(--gradient-one)) 0%, rgb(var(--gradient-two)) 55%, rgb(var(--accent)) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

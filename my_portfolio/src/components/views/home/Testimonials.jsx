@@ -74,7 +74,7 @@ const Testimonials = () => {
                       href={review.projectLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-accent transition-transform duration-300 hover:translate-x-0.5"
+                      className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-accent-text transition-transform duration-300 hover:translate-x-0.5"
                     >
                       Visit the live site
                       <span aria-hidden>&rarr;</span>
