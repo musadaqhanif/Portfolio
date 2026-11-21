@@ -185,6 +185,226 @@ To support this zero-friction utility safely, this initiative focused on **compr
   }
 },
 
+{
+  id: 21,
+  thumbnailType: 'image',
+  thumbnail: '/images/notiassist.jpeg',
+  name: 'NotiAssist',
+  category: 'mobile-application',
+  isFeatured: true,
+  excerpt: 'An Android app I designed and built that turns important notifications into repeating alarms, reply reminders and a private, searchable history. Google Play launch 6 December 2026.',
+  slug: 'notiassist',
+  type: 'personal',
+  skill: [
+    { name: 'Kotlin', icon: '<i class="devicon-kotlin-plain colored"></i>' },
+    { name: 'Jetpack Compose', icon: '<i class="devicon-jetpackcompose-plain colored"></i>' },
+    { name: 'Material 3', icon: '<i class="devicon-materialui-plain colored"></i>' },
+    { name: 'Coroutines & Flow', icon: '<i class="devicon-kotlin-plain colored"></i>' },
+    { name: 'Hilt', icon: '<i class="devicon-android-plain colored"></i>' },
+    { name: 'Room (SQLite)', icon: '<i class="devicon-sqlite-plain colored"></i>' },
+    { name: 'WorkManager', icon: '<i class="devicon-android-plain colored"></i>' },
+    { name: 'Media3 ExoPlayer', icon: '<i class="devicon-android-plain colored"></i>' },
+    { name: 'Firebase', icon: '<i class="devicon-firebase-plain colored"></i>' },
+    { name: 'Play Billing', icon: '<i class="devicon-google-plain colored"></i>' },
+    { name: 'Gradle (Kotlin DSL)', icon: '<i class="devicon-gradle-plain colored"></i>' },
+    { name: 'GitHub Actions', icon: '<i class="devicon-github-original colored"></i>' }
+  ],
+  // The app is not on Google Play until 6 December 2026, so the live link
+  // points at the product site. Swap in the Play Store URL at launch.
+  demoLink: 'https://www.notiassist.com',
+  githubLink: '#', // Private repository
+  content: `# NotiAssist: alarms, reminders and history for important Android notifications
+
+**Alarms, reminders and history for the Android notifications that matter.**
+
+NotiAssist is an Android app I designed and built for one specific failure: an important message arrives, the phone buzzes once, and the moment passes. It watches the apps you choose, rings a real alarm when a message from an important person or with an important word arrives, lets you set a reminder to reply later, and keeps a searchable history of your notifications on your phone.
+
+**Role:** Founder and developer, solo · **Platform:** Android · **Built:** 1-30 November 2026 · **Status:** Google Play launch on 6 December 2026
+
+[Visit notiassist.com](https://www.notiassist.com) · [Read the guides](https://www.notiassist.com/guides)
+
+---
+
+## Why I built it
+
+I lost a client because I missed their messages.
+
+My first attempt at a fix was a desktop one: a [Chrome extension](/portfolio/freelance-gmail-notifier) that played a repeating sound for Upwork, Fiverr and Gmail alerts. It worked, and it solved the problem at my desk.
+
+Then the problem moved to my phone. Most of my client work runs through WhatsApp, and the volume there is high — but most of it does not need an answer right now. One or two messages a day do, and those are exactly the ones that get buried under everything else. A louder phone would not have helped; I needed the phone to be quiet for almost everything and impossible to ignore for the rest.
+
+That distinction is the whole product. NotiAssist is what the extension taught me, rebuilt natively for the place the messages actually arrive.
+
+---
+
+## The problem
+
+Android notifications are built for volume, not importance. A message from your biggest client plays the same short sound as a shopping promo, and if you are in a meeting or the phone is in a bag, it is gone.
+
+Three workflows break regularly:
+
+- **One buzz is not enough.** A notification sounds once. Android lets you give a contact their own tone or let them through Do Not Disturb, but nothing built in keeps ringing until you notice.
+- **"I'll reply later" becomes "I forgot."** You read a message, cannot answer right now, and swipe it away. Android's own snooze is off by default and only offers short delays, and since Android 14 most pinned notifications can be dismissed too.
+- **Swiped away is gone.** [Android only keeps 24 hours of history](https://www.notiassist.com/guides/android-notification-history), it is off by default, and it cannot be searched. If it was not on when something arrived, there is no way back.
+
+People work around this with notification history apps, automation tools, or by leaving messages unread as a to-do list. Each solves part of it, and the more powerful ones expect you to build rules from scratch.
+
+---
+
+## The solution: save it, schedule it, act on it
+
+NotiAssist sits between your apps and your attention. You choose the apps it watches — WhatsApp, Gmail, Slack, Upwork, anything that posts notifications — and for each one you decide what should happen:
+
+1. **Save it.** Notifications from watched apps are captured into a local history you can search later, including messages the sender deletes afterwards.
+2. **Schedule it.** When something needs an answer, tap *Remind later*. The message is saved with the reminder, so clearing the original notification does not lose it.
+3. **Act on it.** When a notification matches a rule — a saved contact, a keyword, a time window — NotiAssist rings a repeating alarm with Dismiss, Snooze and Open app buttons.
+
+The aim is not more notifications. Most of your phone can stay quiet, and the few things that matter get through properly.
+
+---
+
+## Key features
+
+### Alarms for the messages that matter
+- **Contact rules.** Match a saved contact or identifiable sender, for example [an alarm for one WhatsApp contact](https://www.notiassist.com/guides/whatsapp-alarm-for-one-contact) on WhatsApp Business.
+- **Keyword rules.** Words to include (urgent, asap, your name) and words to exclude, to catch what matters in busy group chats.
+- **Your alarm, your way.** Sound, vibration and number of repeats, with alert profiles for different situations.
+- **Time conditions.** Active hours per app plus quiet hours, so work rules do not ring at midnight.
+- **Noise control.** Cooldown, fire-once and duplicate filtering keep an active chat from ringing on every message.
+- **Rule preview.** Test a rule against real captured messages before saving it.
+- **Lock-screen alarm** where Android and the granted permissions allow it.
+
+### Follow-ups and reminders
+- **Remind later** from NotiAssist's follow-up notification, with quick or custom times, a gentle reminder or full alarm, and a note — a way to [set a reminder to reply](https://www.notiassist.com/guides/remind-me-to-reply-android) without leaving the message unread.
+- **Follow-up inbox** that collects everything waiting for a reply, across apps.
+- **Automatic follow-up rules** for chosen apps or contacts, plus manual quick-add and text sharing into NotiAssist.
+- **Recurring reminders**, a home screen widget and a launcher shortcut.
+
+### Notification history
+- **Search** by words, sender, app or date.
+- **Messages that were deleted after they notified you** stay readable — for example, how to [see deleted WhatsApp messages](https://www.notiassist.com/guides/see-deleted-whatsapp-messages-android).
+- **Image previews** from notifications can be viewed, saved or shared.
+- **Pins, labels and conversation view** to organise what matters.
+- **Retention** of 7 days on the free plan, or 30, 90 or 365 days with Pro, with automatic cleanup after that.
+
+### Setup that works on real phones
+- **Four-step onboarding** with a test alarm, so you hear exactly how it behaves on your phone.
+- **Presets** for common setups — Freelancer, Business messages, History only and Manual follow-ups — each previewed before it is applied.
+- **Health checks** that show whether notification capture is still working.
+- **Phone-maker guidance** for Xiaomi, Oppo, Vivo, Samsung and Tecno, whose battery settings often stop background apps. Covered in [support](https://www.notiassist.com/support).
+
+### Privacy controls and languages
+- **Fingerprint or PIN lock** for History and Follow-ups.
+- **60 languages**, with per-app language support and right-to-left layouts for Arabic, Urdu, Persian and Hebrew.
+
+### Honest limits, stated on the product site
+NotiAssist can only work with what an app puts in its notification. Hidden previews, "3 new messages" summaries and long messages limit matching and history. It cannot recover messages from before it was set up, or full-quality photos and voice notes. Whether an alarm sounds on silent depends on the phone's settings. It is Android only.
+
+---
+
+## Technology and architecture
+
+A native Android app with no backend server of its own.
+
+### Language and UI
+Kotlin 2.1 with Coroutines and Flow. Every screen is Jetpack Compose with Material 3 and Navigation Compose, and Coil loads images.
+
+### Android platform
+- Runs on Android 8.0 (API 26) and newer, targeting Android 16 (API 36)
+- **NotificationListenerService** reads incoming notifications, and a **foreground service** keeps protection running
+- **Full-screen intent** shows the alarm over the lock screen, with **Media3 ExoPlayer** playing the sound
+- **AlarmManager** and **WorkManager** run reminders and background jobs
+- **BiometricPrompt** locks saved messages behind fingerprint or PIN
+
+### Architecture
+Clean architecture, split into modules: core (common, data, domain, designsystem) and feature (alerting, apps, history, followups, onboarding, pro, settings). MVVM with ViewModels and StateFlow, and Hilt for dependency injection.
+
+### Storage
+Room (SQLite) holds message history and reminders on the phone. DataStore holds settings. Neither leaves the device.
+
+### Google and Firebase
+Firestore records the one-time Pro preview per device, protected by App Check with Play Integrity so fake requests cannot reset a trial. Crashlytics reports crashes and Analytics tracks usage, both opt-in. Play Billing 8 sells the one-time Pro purchase, and Play In-App Review shows the rating prompt.
+
+### Testing and CI
+JUnit 4 and 5, MockK, Turbine, Robolectric and Truth for unit tests. Espresso and Compose UI tests plus an end-to-end user-journey test run on an emulator. Detekt and Android Lint check code quality, and GitHub Actions runs CI and builds the signed release AAB and APK.
+
+### Build
+Gradle with Kotlin DSL and a version catalog, Android Gradle Plugin 8.9, and KSP.
+
+### Design decisions that fall out of this
+- **On-device processing.** Notifications are read through notification access, matched on the phone, and stored on the phone. Nothing about messages is sent anywhere.
+- **History stays off cloud backup.** It is excluded from Android cloud backup. Settings may be included in device backup, and can be exported and imported as JSON.
+- **Matching is rule-based, not AI.** Rules are deterministic: contacts, keywords, time windows and cooldowns.
+
+### Marketing site
+Next.js on Vercel, with structured data, 12 how-to guides, an llms.txt file, optional GA4 with Consent Mode, and Resend for feedback and beta sign-up emails.
+
+---
+
+## Privacy-first by design
+
+An app that reads every notification sees one-time codes, bank alerts and private messages. I treated that access as the product's main risk, not a detail.
+
+From the [privacy policy](https://www.notiassist.com/privacy-policy):
+
+- Message content never leaves the phone.
+- There is no account and no server of our own, and there are no ads on any plan.
+- Crash reports and usage statistics are opt-in.
+- History expires automatically after the retention period you choose, and entries can be deleted individually.
+- History and Follow-ups can be locked with fingerprint or PIN.
+- Data leaves the phone only when you act: sharing, saving an image, or exporting.
+
+The product site says "your notifications stay on your phone." The precise claim matters: *messages never leave the phone* is a fact, while *nothing ever leaves the phone* would not be, because of the optional diagnostics.
+
+---
+
+## Decisions and trade-offs
+
+- **Alarms only for what matters.** Instead of making all notifications louder, rules target people and words. Cooldown and duplicate filtering exist because a busy chat would otherwise ring nonstop.
+- **Presets over a blank rule builder.** Automation apps are powerful but intimidating, so NotiAssist starts from use cases and previews each preset before applying it.
+- **Being honest about what Android allows.** Contact matching depends on what the source app puts in its notification, and alarm behaviour depends on phone settings. The app ships a test alarm, health checks and skipped-alert reasons rather than overpromising.
+- **A one-time purchase, not a subscription.** The free plan works permanently with one app, and Pro is a one-time Google Play unlock after an optional 7-day preview with no automatic charge.
+- **Designed for phones that kill background apps.** Health checks and phone-maker guidance address the most common cause of "it stopped working".
+- **Built for a global audience.** 60 languages and right-to-left layouts from the start, reflecting markets where WhatsApp is the main business channel.
+
+---
+
+## How it compares
+
+From [the comparison page](https://www.notiassist.com/compare) — differences, not claims of superiority:
+
+- **Notisave** focuses on notification history. NotiAssist adds alarms for important messages and a follow-up workflow on top of history.
+- **BuzzKill** is a flexible notification automation and rule engine. NotiAssist is narrower, with presets for alarms, reminders and history.
+- **Notify me** creates reminder notifications you write yourself. NotiAssist builds reminders from incoming messages.
+- **Android built-in** gives 24-hour history, a short snooze and Do Not Disturb exceptions. NotiAssist offers longer searchable history, custom reminder times and repeating alarms.
+
+---
+
+## What I built
+
+I built NotiAssist solo, as founder and developer, in a single month: development ran from 1 to 30 November 2026, with the Google Play launch on 6 December. Every part of it is mine:
+
+- **Product definition.** The problem, the three-part save, schedule and act workflow, the Basic and Pro split, and the honest-limits approach the whole product site is written around.
+- **The Android app.** Kotlin and Compose throughout, clean architecture across seven feature modules, the notification listener and foreground service, the rule engine, alarm playback over the lock screen, the follow-up scheduler and the on-device history store.
+- **Testing and release engineering.** Unit, Compose UI and end-to-end emulator tests, Detekt and Lint gates, and a GitHub Actions pipeline that builds the signed release bundle.
+- **Privacy and compliance.** Opt-in diagnostics, the privacy policy, and a trial design that avoids storing personal identifiers by hashing the device ID one way.
+- **Localisation.** 60 languages, with per-app language support and right-to-left layouts.
+- **Website and growth.** The marketing site on Next.js and Vercel, structured data for search and AI answers, 12 how-to guides, the comparison page, and the beta sign-up flow.
+
+---
+
+## Closing
+
+NotiAssist is a small app with a narrow job: making sure the messages that matter do not disappear into a notification shade. It does not try to manage every notification. It handles the few that count, keeps them private, and helps you get back to them.
+
+[Visit notiassist.com](https://www.notiassist.com) · [Read the guides](https://www.notiassist.com/guides)
+`,
+  // No review yet: NotiAssist is an own product, not client work, and the app
+  // is not on Google Play until 6 December 2026. Add a real user review here
+  // once there is one - the detail page hides the "Client review" block
+  // entirely while this is absent.
+},
+
 
 {
   id: 3,

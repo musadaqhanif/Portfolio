@@ -1,4 +1,4 @@
-import { BiBook, BiBriefcase, BiBuilding, BiCodeAlt, BiGroup, BiLogoFlask, BiUser, BiBrain, BiDesktop, BiGrid, BiCube } from "react-icons/bi";
+import { BiBook, BiBriefcase, BiBuilding, BiCodeAlt, BiGroup, BiLogoFlask, BiUser, BiBrain, BiDesktop, BiGrid, BiCube, BiMobileAlt } from "react-icons/bi";
 
 export const PORTFOLIO_CATEGORIES = {
     all: {
@@ -17,6 +17,15 @@ export const PORTFOLIO_CATEGORIES = {
         label: {
             en: 'Web Development',
             id: 'Pengembangan Web',
+        }
+    },
+    'mobile-application': {
+        classIcon: 'fad fa-mobile',
+        reactIcon: <BiMobileAlt />,
+        slug: 'mobile-application',
+        label: {
+            en: 'Mobile App',
+            id: 'Aplikasi Mobile',
         }
     },
     'desktop-application': {

@@ -34,10 +34,13 @@ export default function App({ Component, pageProps }) {
   }, []);
 
   return (
+    /* Light is the site's default look. A visitor who has never used the theme
+       toggle gets light, regardless of their OS setting; once they toggle,
+       next-themes remembers their choice in localStorage. */
     <ThemeProvider
       attribute="class"
-      defaultTheme="dark"
-      enableSystem
+      defaultTheme="light"
+      enableSystem={false}
       disableTransitionOnChange
     >
       <div className={`${onest.variable} font-sans`}>
